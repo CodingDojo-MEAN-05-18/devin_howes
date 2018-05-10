@@ -6,18 +6,12 @@ function Ninja (name, health = 100, speed = 3, strength = 3) {
     // make speed = default value of 3 and make "private"
     var strength = strength; 
     // make strength = default value of 3 and make "private"
-    this.punch = punch
     this.kick = kick
 
     this.showStats = function() { 
         // this.showStats shows the statistics for the current ninja
         console.log("Name: " + this.name + ", Health: " + this.health + ", Speed: " + speed + ", Strength: " + strength);
         return this;
-    }
-
-    function punch(target) {
-        target.health -= 5;
-        console.log(this.name, "punched", target.name, "and reduced his health by 5 to", target.health)
     }
 
     function kick(target) {
@@ -39,6 +33,11 @@ function Ninja (name, health = 100, speed = 3, strength = 3) {
         this.health += 10;
         console.log("You drank Sake and increased your health by 10 to:", this.health);
         return this;
+    }
+
+    Ninja.prototype.punch = function(target) {
+        target.health -= 5;
+        console.log(this.name, "punched", target.name, "and reduced his health by 5 to", target.health)
     }
 
 var ninja1 = new Ninja("Hyabusa");
