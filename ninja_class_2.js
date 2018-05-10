@@ -15,6 +15,7 @@ function Ninja (name, health = 100, speed = 3, strength = 3) {
     }
 
     function kick(target) {
+        // this isnt a prototype because it modifies the private variables
         const lostHealth = (15 * strength)
         target.health -= lostHealth;
         console.log(this.name, "kicked", target.name, "and reduced his health by", lostHealth, "to", target.health)
