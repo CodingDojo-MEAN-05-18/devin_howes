@@ -33,6 +33,18 @@ class Ninja {
         console.log(`${ this.name } punched ${ target.name } and reduced his health by 5 to ${ target.health }`)
     }
 }
+// child Sensei class
+class Sensei extends Ninja {
+    constructor(name, health = 200, speed = 10, strength = 10) {
+        super(name, health, speed, strength);
+    }
+
+    speakWisdom() {
+        super.drinkSake();
+        console.log('"What one programmer can do in one month, two programmers can do in two months"');
+    }
+}
+
 
 const ninja1 = new Ninja("Hyabusa");
 const ninja2 = new Ninja("Bob", 50, 1, 4);
@@ -54,3 +66,8 @@ ninja2.punch(ninja1);
 console.log('----------');
 
 ninja2.kick(ninja1);
+console.log('----------');
+
+const superSensei = new Sensei("Master Splinter");
+superSensei.speakWisdom();
+superSensei.showStats();
