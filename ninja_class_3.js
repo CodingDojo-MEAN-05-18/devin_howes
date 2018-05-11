@@ -35,13 +35,19 @@ class Ninja {
 }
 // child Sensei class
 class Sensei extends Ninja {
-    constructor(name, health = 200, speed = 10, strength = 10) {
+    constructor(name, health = 200, speed = 10, strength = 10, wisdom = 10) {
         super(name, health, speed, strength);
+        this.wisdom = wisdom;
     }
 
     speakWisdom() {
         super.drinkSake();
         console.log('"What one programmer can do in one month, two programmers can do in two months"');
+    }
+
+    showStats() {
+        console.log(`Name: ${ this.name }, Health: ${ this.health }, Speed: ${ this.speed }, Strength: ${ this.strength }, Wisdom: ${ this.wisdom }`);
+        return this;
     }
 }
 
