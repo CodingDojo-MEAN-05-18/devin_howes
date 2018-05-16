@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojos</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Dojos</h1>
+        
+        <div id="form">
+            <form action="/create" method="post">
+                <ul>
+                    <li>
+                        <label for="name">Dojo Name</label>
+                        <input type="text" name="name">
+                    </li>
+                    <li>
+                        <label for="location">Location</label>
+                        <input type="text" name="location">
+                    </li>
+                    <li>
+                        <label for="status">Dojo Status</label>
+                        <ul>    
+                            <li><input type="checkbox" name="online">Online</li>
+                            <li><input type="checkbox" name="in-person">In Person</li>
+                        </ul>
+                    </li>
+                </ul>
+                <input type="submit" value="Create Dojo">
+            </form>
+        </div>
+        
+        <p>Where would you like to go next?</p>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/ninjas">Ninjas</a>
+            </li>
+            <li>
+                <a href="/else">Don't Click Me</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
