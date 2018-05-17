@@ -10,7 +10,7 @@ module.exports = function(){
             console.log(num, 'squared is equal to:', num^2);
         },
         random: function(num1, num2) {
-            var random = Math.random();//look up random property
+            var random = Math.floor((Math.random() * 35) + 1);;
             console.log('Random number between', num1, 'and', num2, 'is', random);
         }
     }
