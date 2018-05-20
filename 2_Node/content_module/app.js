@@ -1,6 +1,7 @@
 // http server
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 
 const static_contents = require('./static.js');
 
