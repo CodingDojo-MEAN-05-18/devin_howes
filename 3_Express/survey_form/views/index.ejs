@@ -8,6 +8,39 @@
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
-    
+    <h1>Survey Form</h1>
+    <form action='/result' method='post'>
+        <ul>
+            <li>
+                <label for="name">Your Name:</label>
+                <input type="text" name="name">
+            </li>
+            <li>
+                <label for="location">Dojo Location:</label>
+                <select name="location">
+                    <option value="Online">Online</option>
+                    <option value="On-Site">On-Site</option>
+                </select>
+            </li>
+            <li>
+                <label for="language">Favorite Language:</label>
+                <select name="language">
+                    <option value="HTML">HTML</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="English">English</option>
+                </select>
+            </li>
+            <li>
+                Comment (optional):
+                <textarea name="comment" cols="40" rows="10"></textarea>
+            </li>
+            <li class="button">
+                <input type="reset" value="Clear">
+                <input type="submit" value="Submit">
+            </li>
+        </ul>
+        
+    </form>
 </body>
 </html>

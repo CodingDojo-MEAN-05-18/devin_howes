@@ -8,6 +8,28 @@
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
-    
+    <h1>Survey Result</h1>
+    <div id="info">
+        <h3><u>Submitted Information</u></h3>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><%= context.name %></td>
+            </tr>
+            <tr>
+                <td>Dojo Location:</td>
+                <td><%= context.location %></td>
+            </tr>
+            <tr>
+                <td>Favorite Language:</td>
+                <td><%= context.language %></td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td><%= context.comment %></td>
+            </tr>
+        </table>
+        <a href="/">Go Back</a>
+    </div>
 </body>
 </html>
