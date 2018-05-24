@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey Form</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            console.log("ready...")
+            var socket = io.connect();
+            $('form').submit(function(e){
+                e.preventDefault();
+                socket.emit('posting_form', {
+                    name: $('#name').val(),
+                    location: $('#location').val(),
+                    language: $('#language').val(),
+                    comment: $('#comment').val()
+                });
+            });
+            // display the emit response from server:
+            socket.on('updated_message', function(data){
+                $('#msg').removeClass('hidden');
+                $('#msg').html("The following was emitted: " + JSON.stringify(data.response));
+            });
+            socket.on('random', function(data){
+                $('#msg').append("<br><i>Your lucky number is: " + JSON.stringify(data.response));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="msg" class="hidden">
+    </div>
+    <h1>Survey Form</h1>
+    <form action='/result' method='post'>
+        <ul>
+            <li>
+                <label for="name">Your Name:</label>
+                <input type="text" name="name" id="name">
+            </li>
+            <li>
+                <label for="location">Dojo Location:</label>
+                <select name="location" id="location">
+                    <option value="Online">Online</option>
+                    <option value="On-Site">On-Site</option>
+                </select>
+            </li>
+            <li>
+                <label for="language">Favorite Language:</label>
+                <select name="language" id="language">
+                    <option value="HTML">HTML</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="English">English</option>
+                </select>
+            </li>
+            <li>
+                Comment (optional):
+                <textarea name="comment" id="comment" cols="40" rows="10"></textarea>
+            </li>
+            <li class="button">
+                <input type="reset" value="Clear">
+                <input type="submit" value="Submit">
+            </li>
+        </ul>
+        
+    </form>
+</body>
+</html>

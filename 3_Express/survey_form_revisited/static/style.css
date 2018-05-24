@@ -1,0 +1,39 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul, li {
+    list-style: none;
+    margin: 5px;
+}
+
+form {
+    width: 300px;
+}
+
+.button {
+    text-align: right;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#info {
+    border: 1px solid grey;
+    width: 600px;
+    padding: 10px;
+}
+
+#msg {
+    border: 2px solid green;
+    background-color: palegreen;
+    width: 400px;
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+a {
+    float: right;
+    margin: 20px;
+}
