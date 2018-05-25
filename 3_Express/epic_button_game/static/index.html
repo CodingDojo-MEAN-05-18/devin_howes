@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+
+    <title>Epic Button Game</title>
+
+    <!-- JavaScript -->
+    <script>
+        $('document').ready(function () {
+            console.log("Ready...");
+            var socket = io.connect();
+
+            // Action when the button is pressed:
+            socket.on('updateCount', function(counter) {
+                // jquery to grab the count id to update the number of times
+                $('#count').text(counter);
+            });
+
+            // Emit to tell server button was pressed
+            $('#update').click(function() {
+                socket.emit('buttonClick');
+            });
+
+            // Emit to tell server the reset was pressed
+            $('#reset').click(function() {
+                socket.emit('reset');
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Epic Button Game</h1>
+    <p><i>Hit the button to increase the count!</i></p>
+    <h2>The button has been pushed <span id="count">0</span> times!</h2>
+    <button id="update">Update Count</button>
+    <button id="reset">Reset Count</button>
+</body>
+</html>
