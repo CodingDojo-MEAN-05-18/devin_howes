@@ -49,7 +49,8 @@
             $('form').submit(function(e){
                 e.preventDefault();
                 socket.emit('new_message', {
-                    user: $('#user_id').val(),
+                    user_id: $('#user_id').val(),
+                    user_name: $('#name').val(),
                     message: $('#content').val(),
                 });
             });
@@ -57,7 +58,7 @@
             // display the emit response from server:
             socket.on('update_chat', function(data){
                 $('#chat_msg').append(
-                    `<li>${ data.user }: ${ data.message }</li>`
+                    `<li>${ data.user_name }: ${ data.message }</li>`
                 );
             });
         });
@@ -84,7 +85,8 @@
             </div>
             <div id="message">
                 <form action="">
-                    <input type="hidden" name="user_id" id="user_id" value="<%= id %>">
+                    <input type="hidden" name="user_id" id="user_id" value=<%= id %>>
+                    <input type="hidden" name="user_name" id="name" value=<%= name %>>
                     <input type="text" name="message" id="content">
                     <input type="submit" value="Send">
                 </form>
