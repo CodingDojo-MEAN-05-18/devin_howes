@@ -49,10 +49,11 @@
             $('form').submit(function(e){
                 e.preventDefault();
                 socket.emit('new_message', {
-                    user: '',
+                    user: $('#user_id').val(),
                     message: $('#content').val(),
                 });
             });
+
             // display the emit response from server:
             socket.on('update_chat', function(data){
                 $('#chat_msg').append(
@@ -83,6 +84,7 @@
             </div>
             <div id="message">
                 <form action="">
+                    <input type="hidden" name="user_id" id="user_id" value="<%= id %>">
                     <input type="text" name="message" id="content">
                     <input type="submit" value="Send">
                 </form>

@@ -31,16 +31,18 @@ const server = app.listen(port, function () {
 
 // route
 app.get('/', function(req, res){
-    res.render('index');
+    res.render('index', {id: session.user_id});
 });
 
 // socket code
 const io = require('socket.io')(server);
 let all_users = [];
 let chats = [];
+let current_user = session.id;
 
 if (!session.count) {
     session.count = 0;
+    session.user_id = 0;
 };
 
 io.on('connection', function(socket) {
@@ -48,9 +50,9 @@ io.on('connection', function(socket) {
     
     // listen for new user name:
     socket.on('got_new_user', function(req){
-        all_users.push({id: session.count, name: req.name});
+        all_users.push({id: session.id, name: req.name});
+        session.user_id = session.count;
         session.count++;
-        // console.log(users);
         io.emit('new_user', {new_user: req.name});
     });
 
