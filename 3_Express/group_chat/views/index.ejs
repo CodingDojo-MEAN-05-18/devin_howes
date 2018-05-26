@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Group Chat</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+
+    <!-- JS -->
+    <script>
+        $('document').ready(function() {
+            console.log("Ready...")
+            var socket = io.connect();
+            // prompt for user and emit to server
+            var name = prompt('What is your name?');
+            socket.emit('got_new_user', {name: name});
+            // listen for new user
+            socket.on('new_user', function(data){
+                console.log(data);
+                $('#newest_user').html(
+                    `<p><i>Newest User: ${ data.new_user }</i></p>`);
+            });
+
+            socket.on('existing_users', function(all_users){
+                console.log(all_users);
+                for (var i = 0; i < all_users.length; i++) {
+                    $('#active_users').append(
+                        `<p>Users: ${ all_users[i] }</p>`);
+                };
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Group Chat</h1>
+    <div id="active_users">
+        <h4>Active Users List:</h4>
+    </div>
+    <div id="newest_user">
+    </div>
+</body>
+</html>
