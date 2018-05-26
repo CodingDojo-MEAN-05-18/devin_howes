@@ -12,25 +12,18 @@ module.exports = function Route(app, server) {
     const io = require('socket.io')(server);
     let all_users = [];
     let chats = [];
-
-    if (!session.count) {
-        session.count = 1;
-    };
+    let current_user = '';
 
     io.on('connection', function (socket) {
-        console.log(`user ${ session.count } connected`);
+        console.log("user connected");
 
         // listen for new user name:
         socket.on('got_new_user', function (req) {
-            session.user_id = session.count;
-            session.count++;
-
-            session.user_name = req.name;
-
             all_users.push({
-                id: session.user_id,
-                name: session.user_name
+                name: req.name,
             });
+
+            current_user = req.name;
 
             io.emit('new_user', { new_user: req.name });
         });
@@ -38,7 +31,6 @@ module.exports = function Route(app, server) {
         // listen for new messages:
         socket.on('new_message', function (data) {
             chats.push({
-                user_id: data.user,
                 user_name: data.user_name,
                 message: data.message
             });
@@ -53,9 +45,7 @@ module.exports = function Route(app, server) {
 
     // route
     app.get('/', function (req, res) {
-        res.render('index', {
-            id: session.user_id,
-            name: session.user_name
-        });
+        console.log(current_user);
+        res.render('index');
     });
 };

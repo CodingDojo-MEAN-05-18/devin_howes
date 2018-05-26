@@ -18,23 +18,10 @@
         $('document').ready(function() {
             console.log("Ready...")
             var socket = io.connect();
+
             // prompt for user and emit to server
             var name = prompt('What is your name?');
             socket.emit('got_new_user', {name: name});
-            // listen for new user
-            socket.on('new_user', function(new_user){
-                console.log(new_user);
-                $('#newest_user').html(
-                    `<p><i>Newest User: ${ new_user.new_user }</i></p>`);
-            });
-
-            socket.on('existing_users', function(all_users){
-                console.log(all_users);
-                for (var i = 0; i < all_users.length; i++) {
-                    $('#active_users').append(
-                        `<li>${ all_users[i].id }, ${ all_users[i].name }</li>`);
-                };
-            });
 
             socket.on('chat_history', function(chats){
                 console.log(chats);
@@ -49,8 +36,7 @@
             $('form').submit(function(e){
                 e.preventDefault();
                 socket.emit('new_message', {
-                    user_id: $('#user_id').val(),
-                    user_name: $('#name').val(),
+                    user_name: name,
                     message: $('#content').val(),
                 });
             });
@@ -66,17 +52,7 @@
 </head>
 <body>
     <div id="container">
-    <h1>Group Chat</h1>
-        <div id="user_list">
-        <h4>Active Users:</h4>
-            <div id="newest_user">
-                <!-- Display newest user here -->
-            </div>
-            <p><b>Other Users:</b></p>
-            <ul id="active_users">
-                <!-- Users listed here -->
-            </ul>
-        </div>
+        <h1>Group Chat</h1>
         <div id="chat_window">
             <div id="chat">
                 <ul id="chat_msg">
@@ -85,8 +61,8 @@
             </div>
             <div id="message">
                 <form action="">
-                    <input type="hidden" name="user_id" id="user_id" value=<%= id %>>
-                    <input type="hidden" name="user_name" id="name" value=<%= name %>>
+                    <!-- <input type="hidden" name="user_id" id="user_id" value=''> -->
+                    <!-- <input type="hidden" name="user_name" id="name" value= '' > -->
                     <input type="text" name="message" id="content">
                     <input type="submit" value="Send">
                 </form>
