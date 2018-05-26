@@ -7,16 +7,6 @@ html {
     margin: 0 auto;
 }
 
-#user_list {
-    width: 200px;
-    height: 400px;
-    overflow-y: scroll;
-    border: 1px solid grey;
-    padding: 5px;
-    display: inline-block;
-    vertical-align: top;
-}
-
 #chat_window {
     width: 510px;
     height: 400px;

@@ -27,7 +27,7 @@
                 console.log(chats);
                 for (var i = 0; i < chats.length; i++ ){
                     $('#chat_msg').append(
-                        `<li>${ chats[i].user }: ${ chats[i].message }</li>`
+                        `<li>${ chats[i].user_name }: ${ chats[i].message }</li>`
                     );
                 };
             });
@@ -49,6 +49,7 @@
             });
         });
     </script>
+
 </head>
 <body>
     <div id="container">
@@ -61,8 +62,6 @@
             </div>
             <div id="message">
                 <form action="">
-                    <!-- <input type="hidden" name="user_id" id="user_id" value=''> -->
-                    <!-- <input type="hidden" name="user_name" id="name" value= '' > -->
                     <input type="text" name="message" id="content">
                     <input type="submit" value="Send">
                 </form>

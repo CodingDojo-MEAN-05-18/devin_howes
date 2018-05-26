@@ -1,13 +1,4 @@
 module.exports = function Route(app, server) {
-    // Session
-    const session = require('express-session');
-    app.use(session({
-        secret: 'bigsecret',
-        resave: false,
-        saveUninitialized: true,
-        cookie: { maxAge: 60000 }
-    }));
-    
     // socket code
     const io = require('socket.io')(server);
     let all_users = [];
@@ -34,12 +25,12 @@ module.exports = function Route(app, server) {
                 user_name: data.user_name,
                 message: data.message
             });
+            console.log(chats);
             io.emit('update_chat', data);
         });
 
-        // every user sees all users and chats:
+        // every user sees all chats:
         socket.emit('chat_history', chats);
-        socket.emit('existing_users', all_users);
 
     });
 
