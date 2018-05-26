@@ -28,6 +28,7 @@ app.get('/', function(req, res){
 // socket code
 const io = require('socket.io')(server);
 let all_users = [];
+let chats = [];
 
 io.on('connection', function(socket) {
     console.log('user connected');
@@ -39,8 +40,17 @@ io.on('connection', function(socket) {
         io.emit('new_user', {new_user: req.name});
     });
 
-    // every user sees all users:
+    // listen for new messages:
+    socket.on('new_message', function(data){
+        // console.log('message' + data);
+        chats.push({user: data.user, message: data.message});
+        io.emit('update_chat', data);
+    });
+
+    // every user sees all users and chats:
     socket.emit('existing_users', all_users);
     console.log(all_users);
-    
+
+    socket.emit('chat_history', chats);
+    console.log(chats);
 });

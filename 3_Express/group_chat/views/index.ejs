@@ -30,26 +30,62 @@
 
             socket.on('existing_users', function(all_users){
                 console.log(all_users);
-                for (var i = all_users.length-1 ; i > 0; i--) {
+                for (var i = all_users.length-1; i > 0; i--) {
                     $('#active_users').append(
                         `<li>${ all_users[i] }</li>`);
                 };
-                
+            });
+
+            socket.on('chat_history', function(chats){
+                console.log(chats);
+                for (var i = 0; i < chats.length; i++ ){
+                    $('#chat').append(
+                        `${ chats[i].user }: ${ chats[i].message }`
+                    );
+                };
+            });
+
+            // handle messages
+            $('form').submit(function(e){
+                e.preventDefault();
+                socket.emit('new_message', {
+                    user: "sessionID",
+                    message: $('#content').val(),
+                });
+            });
+            // display the emit response from server:
+            socket.on('update_chat', function(data){
+                $('#chat').append(
+                    `${ data.user }: ${ data.message }`
+                );
             });
         });
     </script>
 </head>
 <body>
+    <div id="container">
     <h1>Group Chat</h1>
-    <div id="user_list">
-    <h4>Active Users:</h4>
-        <div id="newest_user">
-            <!-- Display newest user here -->
+        <div id="user_list">
+        <h4>Active Users:</h4>
+            <div id="newest_user">
+                <!-- Display newest user here -->
+            </div>
+            <p><b>Other Users:</b></p>
+            <ul id="active_users">
+                <!-- Users listed here -->
+            </ul>
         </div>
-        <p><b>Other Users:</b></p>
-        <ul id="active_users">
-            <!-- Users listed here -->
-        </ul>
+        <div id="chat_window">
+            <div id="chat">
+                Chat Content
+            </div>
+            <div id="message">
+                <form action="">
+                    <input type="text" name="message" id="content">
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
