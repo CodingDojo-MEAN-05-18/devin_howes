@@ -32,15 +32,15 @@
                 console.log(all_users);
                 for (var i = all_users.length-1; i > 0; i--) {
                     $('#active_users').append(
-                        `<li>${ all_users[i] }</li>`);
+                        `<li>${ all_users[i].id }, ${ all_users[i].name }</li>`);
                 };
             });
 
             socket.on('chat_history', function(chats){
                 console.log(chats);
                 for (var i = 0; i < chats.length; i++ ){
-                    $('#chat').append(
-                        `${ chats[i].user }: ${ chats[i].message }`
+                    $('#chat_msg').append(
+                        `<li>${ chats[i].user }: ${ chats[i].message }</li>`
                     );
                 };
             });
@@ -49,14 +49,14 @@
             $('form').submit(function(e){
                 e.preventDefault();
                 socket.emit('new_message', {
-                    user: "sessionID",
+                    user: '',
                     message: $('#content').val(),
                 });
             });
             // display the emit response from server:
             socket.on('update_chat', function(data){
-                $('#chat').append(
-                    `${ data.user }: ${ data.message }`
+                $('#chat_msg').append(
+                    `<li>${ data.user }: ${ data.message }</li>`
                 );
             });
         });
@@ -77,7 +77,9 @@
         </div>
         <div id="chat_window">
             <div id="chat">
-                Chat Content
+                <ul id="chat_msg">
+                    <!-- Chat messages here -->
+                </ul>
             </div>
             <div id="message">
                 <form action="">

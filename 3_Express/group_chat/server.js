@@ -7,6 +7,15 @@ const app = express();
 // Path
 const path = require('path');
 
+// Session
+const session = require('express-session');
+app.use(session({
+    secret: 'bigsecret',
+    resage: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}));
+
 // Static Directory
 app.use(express.static(path.join(__dirname, 'static')));
 
@@ -30,12 +39,17 @@ const io = require('socket.io')(server);
 let all_users = [];
 let chats = [];
 
+if (!session.count) {
+    session.count = 0;
+};
+
 io.on('connection', function(socket) {
     console.log('user connected');
     
     // listen for new user name:
     socket.on('got_new_user', function(req){
-        all_users.push(req.name);
+        all_users.push({id: session.count, name: req.name});
+        session.count++;
         // console.log(users);
         io.emit('new_user', {new_user: req.name});
     });
