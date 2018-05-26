@@ -30,7 +30,7 @@
 
             socket.on('existing_users', function(all_users){
                 console.log(all_users);
-                for (var i = all_users.length-1; i > 0; i--) {
+                for (var i = 0; i < all_users.length; i++) {
                     $('#active_users').append(
                         `<li>${ all_users[i].id }, ${ all_users[i].name }</li>`);
                 };

@@ -3,11 +3,9 @@ module.exports = function Route(app, server) {
     const session = require('express-session');
     app.use(session({
         secret: 'bigsecret',
-        resage: false,
+        resave: false,
         saveUninitialized: true,
-        cookie: {
-            maxAge: 60000
-        }
+        cookie: { maxAge: 60000 }
     }));
     
     // socket code
@@ -16,7 +14,7 @@ module.exports = function Route(app, server) {
     let chats = [];
 
     if (!session.count) {
-        session.count = 0;
+        session.count = 1;
     };
 
     io.on('connection', function (socket) {
@@ -34,12 +32,7 @@ module.exports = function Route(app, server) {
                 name: session.user_name
             });
 
-            if (all_users.length !== 0) {
-                io.emit('new_user', {
-                    new_user: req.name
-                });
-                io.emit('existing_users', all_users);
-            }
+            io.emit('new_user', { new_user: req.name });
         });
 
         // listen for new messages:
@@ -54,6 +47,7 @@ module.exports = function Route(app, server) {
 
         // every user sees all users and chats:
         socket.emit('chat_history', chats);
+        socket.emit('existing_users', all_users);
 
     });
 

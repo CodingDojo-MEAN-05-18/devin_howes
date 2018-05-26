@@ -20,5 +20,5 @@ const server = app.listen(port, function () {
     console.log(`Listening on port ${ port }`);
 });
 
-// load the routes file, pass app and server into it (for handling url visits and events)
+// load the routes file, pass app and server into it
 require('./routes/index.js')(app, server);
