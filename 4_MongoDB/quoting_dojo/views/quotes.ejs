@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <title>Quotes | Quoting Dojo</title>
+</head>
+<body>
+    <h2>Here are the awesome quotes!</h2>
+    <div class="quotes">
+        <ul>
+            <% for(var x in quotes) { %>
+                <li>"<%= quotes[x].quote %>"
+                    <ul>
+                        <li><%= quotes[x].name, quotes[x].timestamp %></li>
+                    </ul>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    <a href="/">Back</a>
+</body>
+</html>
