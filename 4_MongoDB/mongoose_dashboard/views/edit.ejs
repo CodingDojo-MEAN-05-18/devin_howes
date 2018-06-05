@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit | Wolves Dashboard</title>
+</head>
+<body>
+    <h1>Add a Wolf to the Pack:</h1>
+    <% for (var x in wolves) { %>
+    <form action="/wolves/<%= wolves[x].id %>" method="post">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="name" id="name" value="<%= wolves[x].name%>"></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td>
+                    <select name="color" id="color" value="<%= wolves[x].color%>">
+                        <option value="grey">Grey</option>
+                        <option value="white">White</option>
+                        <option value="black">Black</option>
+                        <option value="brown">Brown</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="text" name="age" id="age" value="<%= wolves[x].age%>"></td>
+            </tr>
+            <tr>
+                <td>Aggressive towards humans?:</td>
+                <td>
+                    <select name="isAggressive" id="isAggressive" value="<%= wolves[x].isAggressive%>">
+                        <option value="true">Aggressive</option>
+                        <option value="false">Not Aggressive</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Update Wolf">
+        <input type="reset" value="Reset Form">
+    </form>
+    <% } %>
+    <a href="/">Home</a>
+</body>
+</html>
