@@ -70,9 +70,7 @@ app.get('/wolves/new', function(req, res) {
 
 // GET '/wolves/:id' Displays information about one wolf.
 app.get('/wolves/:id', function(req, res) {
-    var id = (req.params.id);
-
-    Wolve.find({_id: id}, function (err, wolves) {
+   Wolve.find({_id: req.params.id}, function (err, wolves) {
         if (err) {
             console.log("Something went wrong");
         } else {
@@ -108,9 +106,7 @@ app.post('/wolves', function(req, res) {
 
 // GET '/wolves/edit/:id' Should show a form to edit an existing wolf.
 app.get('/wolves/edit/:id', function(req, res) {
-    var id = (req.params.id);
-
-    Wolve.find({_id: id}, function (err, wolves) {
+    Wolve.find({_id: req.params.id}, function (err, wolves) {
         if (err) {
             console.log("Something went wrong");
         } else {
@@ -121,18 +117,17 @@ app.get('/wolves/edit/:id', function(req, res) {
 
 // POST '/wolves/:id' Should be the action attribute for the form in the above route(GET '/wolves/edit/:id').
 app.post('/wolves/:id', function (req, res) {
-    console.log(req.body);
-
-    var id = req.params.id
-    var name = req.body.name;
-    var age = req.body.age;
-    var color = req.body.color;
-    var aggressive = req.body.isAggressive;
-
-    Wolve.update({_id: id}, {name: name, age: age, color: color, isAggressive: aggressive}, function (err, wolves) {
-        if (err) {
+    Wolve.update({_id: req.params.id}, 
+        {
+            name: req.body.name, 
+            age: req.body.age, 
+            color: req.body.color, 
+            isAggressive: req.body.isAggressive
+        }, 
+        function (err, wolves) {
+            if (err) {
             console.log("Something went wrong");
-        } else {
+            } else {
             res.redirect('/');
         }
     });
@@ -140,9 +135,7 @@ app.post('/wolves/:id', function (req, res) {
 
 // POST '/wolves/destroy/:id' Should delete the wolf from the database by ID.
 app.post('/wolves/destroy/:id', function (req, res) {
-    var id = req.params.id;
-
-    Wolve.remove({_id: id}, function (err, wolves) {
+    Wolve.remove({_id: req.params.id}, function (err, wolves) {
         if (err) {
             console.log("Something went wrong");
         } else {
