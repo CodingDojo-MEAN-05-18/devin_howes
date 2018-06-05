@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile | Wolves Dashboard</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <% for(var x in wolves) { %>
+        <ul>
+            <li>Name: <%= wolves[x].name %></li>
+            <li>Color: <%= wolves[x].color %></li>
+            <li>Age: <%= wolves[x].age %></li>
+            <li>Aggressive toward Humans?: <%= wolves[x].isAggressive %></li>
+        </ul>
+        <p>Last updated at: <%= wolves[x].updatedAt %> </p>
+        <p>
+            <a href="/wolves/edit/<%= wolves[x].id %>">Edit</a> |
+            <a href="/">Home</a>
+        </p>
+    <% } %>
+</body>
+</html>

@@ -31,9 +31,9 @@
                     <td><%= wolves[x].isAggressive %></td>
                     <td><%= wolves[x].updatedAt %></td>
                     <td>
-                        <a href="">View</a> | 
-                        <a href="">Update</a> |
-                        <a href="">Delete</a>
+                        <a href="/wolves/<%= wolves[x].id %>">View</a> |
+                        <a href="/wolves/edit/<%= wolves[x].id %>">Edit</a> |
+                        <a href="/wolves/destroy/<%= wolves[x].id %>">Delete</a>
                     </td>
                 </tr>
             <% } %>

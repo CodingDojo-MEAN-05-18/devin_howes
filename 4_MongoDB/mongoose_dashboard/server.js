@@ -69,6 +69,17 @@ app.get('/wolves/new', function(req, res) {
 });
 
 // GET '/wolves/:id' Displays information about one wolf.
+app.get('/wolves/:id', function(req, res) {
+    var id = (req.params.id);
+
+    Wolve.find({_id: id}, function (err, wolves) {
+        if (err) {
+            console.log("Something went wrong");
+        } else {
+            res.render('profile', { wolves });
+        }
+    });
+})
 
 // POST '/wolves' Should be the action attribute for the form in the above route(GET '/wolves/new').
 app.post('/wolves', function(req, res) {
