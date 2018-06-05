@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Wolves | Wolves Dashboard</title>
+</head>
+
+<body>
+    <h1>A Pack of Wolves:</h1>
+    <div class="wolves">
+        <a href="/wolves/new">Add a Wolf to the Pack!</a>
+        <table>
+            <thead>
+                <th>Wolf Name</th>
+                <th>Wolf Color</th>
+                <th>Wolf Age</th>
+                <th>Is Aggressive</th>
+                <th>Last Update</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+            <% for(var x in wolves) { %>
+                <tr>
+                    <td><%= wolves[x].name %></td>
+                    <td><%= wolves[x].color %></td>
+                    <td><%= wolves[x].age %></td>
+                    <td><%= wolves[x].isAggressive %></td>
+                    <td><%= wolves[x].updatedAt %></td>
+                    <td>
+                        <a href="">View</a> | 
+                        <a href="">Update</a> |
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
