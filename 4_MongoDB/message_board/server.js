@@ -39,14 +39,20 @@ const Comment = mongoose.model('Comment', CommentSchema);
 
 // Routes
 app.get('/', function(req, res) {
-    res.render('index');
+    Post.find({}, function(err, posts) {
+        if (err) {
+            console.log('Something went wrong');
+        } else {
+            res.render('index', { posts });
+        }
+    });
 });
 
 app.post('/message/add', function(req, res) {
     console.log(req.body);
 
     const post = new Post({
-        content: req.body.post,
+        content: req.body.message,
         name: req.body.name,
     });
 
@@ -61,6 +67,29 @@ app.post('/message/add', function(req, res) {
         } else {
             console.log('successfully added a post!');
             res.redirect('/');
+        }
+    });
+});
+
+app.post('/comment/add', function (req, res) {
+    console.log(req.body);
+
+    const Post = mongoose.Schema('Post');
+    const Comment = mongoose.Schema('Comment');
+
+    Comment.create(req.body, function(err, data){
+        if (err) {
+            console.log('Something went wrong');
+        } else {
+            Post.findOneAndUpdate({_id: req.body.post_id}, {$push: {comments: data}}, function(err, data){
+                if(err){
+                    console.log('Something went wrong');
+                }
+                else {
+                    console.log('successfully added a comment!');
+                    res.redirect('/');
+                }
+            });
         }
     });
 });

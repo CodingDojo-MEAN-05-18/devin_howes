@@ -22,13 +22,28 @@
             <form action="/message/add" method="post">
             <p>Name: <input type="text" name="name" id="name"></p>
             <p>Message:</p>
-            <textarea name="post" id="post" cols="100" rows="5"></textarea>
+            <textarea name="message" id="message" cols="100" rows="5"></textarea>
             <br>
             <input type="submit" value="Add Message">
             </form>
         </div>
         <div id="all_messages">
-            All Messages Here
+            <% for(var x in posts) { %>
+                <hr>
+                <ul>
+                    <li><%= posts[x].name %></li>
+                    <li><%= posts[x].content %></li>
+                    <li><%= posts[x].comments %></li>
+                </ul>
+                <form action="/comment/add" method="post">
+                    <input type="hidden" name="post_id" value="<%= posts[x]._id %>">
+                    <p>Name: <input type="text" name="name" id="name"></p>
+                    <p>Comment:</p>
+                    <textarea name="comment" id="comment" cols="100" rows="5"></textarea>
+                    <br>
+                    <input type="submit" value="Add Comment">
+                </form>
+            <% } %>
         </div>
     </div>
 </body>
