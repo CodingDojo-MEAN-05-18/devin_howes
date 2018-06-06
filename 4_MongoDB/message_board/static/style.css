@@ -1,0 +1,12 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    margin: 40px 0;
+}
+
+#container {
+    width: 960px;
+    margin: 0 auto;
+}

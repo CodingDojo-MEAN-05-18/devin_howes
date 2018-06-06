@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Message Board</title>
+</head>
+<body>
+    <div class="flash-messages">
+        <% if(messages.newPost) { %>
+            <% for (var x of messages.newPost) { %>
+            <p><%= x %></p>
+            <% } %>
+        <% } %>
+    </div>
+    <div id="container">
+        <h1>The Dojo Message Board</h1>
+        <hr>
+        <div id="new_message">
+            <form action="/message/add" method="post">
+            <p>Name: <input type="text" name="name" id="name"></p>
+            <p>Message:</p>
+            <textarea name="post" id="post" cols="100" rows="5"></textarea>
+            <br>
+            <input type="submit" value="Add Message">
+            </form>
+        </div>
+        <div id="all_messages">
+            All Messages Here
+        </div>
+    </div>
+</body>
+</html>
