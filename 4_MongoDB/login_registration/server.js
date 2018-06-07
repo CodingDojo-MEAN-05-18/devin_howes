@@ -26,7 +26,8 @@ const bcrypt = require('bcrypt-as-promised');
 // Database Connection
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/loginregistration');
+mongoose.connect('mongodb://localhost/loginreg');
+console.log('Mongoose connected');
 
 // Database Schema
 const UserSchema = new Schema({
@@ -40,6 +41,7 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
+        unique: [true, "Email is taken!"],
         required: [true, "Email is required!"]
     },
     password: {
@@ -53,22 +55,65 @@ const UserSchema = new Schema({
     }
 }, {timestamps: true});
 
+const User = mongoose.model('User', UserSchema);
+
 // Routes
 app.get('/', function(req, res) {
     res.render('index');
 });
 
 app.get('/user/dashboard', function(req, res) {
+    console.log(req.session.id, req.session.login);
     res.render('dashboard');
 })
 
 app.post('/user/add', function(req, res) {
-    res.redirect('dashboard');
+    const data = req.body;
+
+    // Hash Password before saving!!
+    
+    // Save user
+    User.create(data, function (err, user) {
+        if (err) {
+            console.log('Something went wrong saving user', err);
+        } else {
+            console.log('User created!');
+            User.findOne({email: data.email}, function(err, user) {
+                if (err) {
+                    console.log('Something went wrong getting user');
+                } else {
+                    req.session.login = true;
+                    req.session.id = user._id;
+                }
+            });
+            res.redirect('/user/dashboard');
+        }
+    });
 });
 
 app.post('/user/login', function(req, res) {
-    res.redirect('dashboard');
-})
+    // need to add unhashing here!
+    // need to add flash message here!
+    User.find({email: req.body.login_email}, function(err, user) {
+        if (user.length < 1) {
+            console.log('user not found');
+            res.redirect('/');
+        } else {
+           if (user[0].password == req.body.login_password) {
+                    console.log('login successful');
+                    res.redirect('/user/dashboard');
+            } else {
+                console.log('User password incorrect');
+                res.redirect('/');
+            }
+        }
+    });
+});
+
+app.get('/user/logout', function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 // Server Port
 app.listen(8000, function() {
