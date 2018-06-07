@@ -1,0 +1,22 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    margin: 20px;
+}
+
+fieldset {
+    width: 400px;
+}
+
+#container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.flash-message {
+    font-weight: bold;
+    color: red;
+    list-style: none;
+}
