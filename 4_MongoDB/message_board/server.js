@@ -29,12 +29,12 @@ mongoose.connect('mongodb://localhost/message_board');
 const CommentSchema = new mongoose.Schema({
     content: {type: String, required: [true, "Comment cannot be blank!"]},
     name: {type: String, required: [true, "Name cannot be blank!"]},
-    posts: {type: Schema.Types.ObjectId, ref: 'Post'}
+    posts: [{type: Schema.Types.ObjectId, ref: 'Post'}]
 }, {timestamps: true});
 const PostSchema = new mongoose.Schema({
     name: {type: String, required: [true, "Name cannot be blank!"]},
     content: {type: String, required: [true, "Message cannot be blank!"]},
-    comments: {type: Schema.Types.ObjectId, ref: 'Comment'}
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 }, {timestamps: true});
 
 const Post = mongoose.model('Post', PostSchema);
@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
         if (err) {
             console.log('Something went wrong');
         } else {
-            res.render('index', { posts });
+            res.render('index', { posts: posts });
         }
     });
 });
