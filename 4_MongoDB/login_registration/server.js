@@ -18,6 +18,9 @@ app.use(session({
     cookie: {maxAge: 60000},
 }));
 
+// default session login value:
+session.login = false;
+
 const flash = require('express-flash');
 app.use(flash());
 
@@ -63,8 +66,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/user/dashboard', function(req, res) {
-    console.log(req.session.id, req.session.login);
-    res.render('dashboard');
+    console.log(req.session.user);
+    if (session.login == false) {
+        console.log("You don't have persmission!");
+        res.redirect('/');
+    } else {
+        res.render('dashboard', {user_info: req.session.user});
+    }
 })
 
 app.post('/user/add', function(req, res) {
@@ -101,6 +109,8 @@ app.post('/user/login', function(req, res) {
         } else {
            if (user[0].password == req.body.login_password) {
                     console.log('login successful');
+                    req.session.user = user[0];
+                    session.login = true;
                     res.redirect('/user/dashboard');
             } else {
                 console.log('User password incorrect');
@@ -112,6 +122,7 @@ app.post('/user/login', function(req, res) {
 
 app.get('/user/logout', function(req, res) {
     req.session.destroy();
+    session.login = false;
     res.redirect('/');
 });
 
