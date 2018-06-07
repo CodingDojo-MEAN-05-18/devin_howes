@@ -23,15 +23,18 @@ app.use(flash());
 
 // Database
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 mongoose.connect('mongodb://localhost/message_board');
 // Database Schema
 const CommentSchema = new mongoose.Schema({
-    content: {type: String, required: [true, "Comment cannot be blank!"]}
+    content: {type: String, required: [true, "Comment cannot be blank!"]},
+    name: {type: String, required: [true, "Name cannot be blank!"]},
+    posts: {type: Schema.Types.ObjectId, ref: 'Post'}
 }, {timestamps: true});
 const PostSchema = new mongoose.Schema({
     name: {type: String, required: [true, "Name cannot be blank!"]},
     content: {type: String, required: [true, "Message cannot be blank!"]},
-    comments: [CommentSchema]
+    comments: {type: Schema.Types.ObjectId, ref: 'Comment'}
 }, {timestamps: true});
 
 const Post = mongoose.model('Post', PostSchema);
@@ -39,7 +42,7 @@ const Comment = mongoose.model('Comment', CommentSchema);
 
 // Routes
 app.get('/', function(req, res) {
-    Post.find({}, function(err, posts) {
+    Post.find({}).populate('comments').exec(function(err, posts) {
         if (err) {
             console.log('Something went wrong');
         } else {
@@ -74,24 +77,33 @@ app.post('/message/add', function(req, res) {
 app.post('/comment/add', function (req, res) {
     console.log(req.body);
 
-    const Post = mongoose.Schema('Post');
-    const Comment = mongoose.Schema('Comment');
+    Post.findOne({ _id: req.body.post_id }, function(err, message) {
+        
+        const newComment = new Comment({ 
+            name: req.body.name, 
+            content: req.body.comment 
+        });
+        
+        newComment.Post = Post._id;
+        
+        Post.update({ _id: req.body.post_id }, { $push: { comments: newComment }}, function(err) {
 
-    Comment.create(req.body, function(err, data){
-        if (err) {
-            console.log('Something went wrong');
-        } else {
-            Post.findOneAndUpdate({_id: req.body.post_id}, {$push: {comments: data}}, function(err, data){
-                if(err){
-                    console.log('Something went wrong');
-                }
-                else {
-                    console.log('successfully added a comment!');
-                    res.redirect('/');
-                }
-            });
-        }
-    });
+        });
+
+		newComment.save(function (err) {
+		    if (err) {
+		        console.log('Something went wrong');
+		        for (var key in err.errors) {
+		            req.flash('newPost', err.errors[key].message);
+		            console.log(err.errors[key].message);
+		        }
+		        res.redirect('/');
+		    } else {
+		        console.log('successfully added a comment!');
+		        res.redirect('/');
+		    }
+		});
+	});
 });
 
 // Port

@@ -10,3 +10,13 @@ div {
     width: 960px;
     margin: 0 auto;
 }
+
+.posts {
+    border: 1px solid grey;
+    padding: 5px;
+    width: 750px;
+}
+
+.comment-form {
+    margin-left: 100px;
+}
