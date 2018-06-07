@@ -24,29 +24,29 @@ app.use(flash());
 // Database
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/message_board');
+mongoose.connect('mongodb://localhost/messageboard');
 // Database Schema
 const CommentSchema = new mongoose.Schema({
     content: {type: String, required: [true, "Comment cannot be blank!"]},
     name: {type: String, required: [true, "Name cannot be blank!"]},
-    posts: [{type: Schema.Types.ObjectId, ref: 'Post'}]
+    messages: [{type: Schema.Types.ObjectId, ref: 'Post'}]
 }, {timestamps: true});
-const PostSchema = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
     name: {type: String, required: [true, "Name cannot be blank!"]},
     content: {type: String, required: [true, "Message cannot be blank!"]},
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 }, {timestamps: true});
 
-const Post = mongoose.model('Post', PostSchema);
+const Message = mongoose.model('Message', MessageSchema);
 const Comment = mongoose.model('Comment', CommentSchema);
 
 // Routes
 app.get('/', function(req, res) {
-    Post.find({}).populate('comments').exec(function(err, posts) {
+    Message.find({}).populate('comments').exec(function(err, messages) {
         if (err) {
             console.log('Something went wrong');
         } else {
-            res.render('index', { posts: posts });
+            res.render('index', { messages });
         }
     });
 });
@@ -54,12 +54,12 @@ app.get('/', function(req, res) {
 app.post('/message/add', function(req, res) {
     console.log(req.body);
 
-    const post = new Post({
+    const message = new Message({
         content: req.body.message,
         name: req.body.name,
     });
 
-    post.save(function (err) {
+    message.save(function (err) {
         if (err) {
             console.log('Something went wrong');
             for(var key in err.errors) {
@@ -77,16 +77,16 @@ app.post('/message/add', function(req, res) {
 app.post('/comment/add', function (req, res) {
     console.log(req.body);
 
-    Post.findOne({ _id: req.body.post_id }, function(err, message) {
+    Message.findOne({ _id: req.body.message_id }, function(err, message) {
         
         const newComment = new Comment({ 
             name: req.body.name, 
             content: req.body.comment 
         });
         
-        newComment.Post = Post._id;
+        newComment.Message = Message._id;
         
-        Post.update({ _id: req.body.post_id }, { $push: { comments: newComment }}, function(err) {
+        Message.update({ _id: req.body.message_id }, { $push: { comments: newComment }}, function(err) {
 
         });
 
