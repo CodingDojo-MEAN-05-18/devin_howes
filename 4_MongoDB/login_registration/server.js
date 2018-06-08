@@ -63,7 +63,7 @@ const User = mongoose.model('User', UserSchema);
 
 // Routes
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index' , {expressFlash: req.flash('success')});
 });
 
 app.get('/user/dashboard', function(req, res) {
@@ -71,7 +71,7 @@ app.get('/user/dashboard', function(req, res) {
         console.log("You don't have persmission!");
         res.redirect('/');
     } else {
-        res.render('dashboard', {user_info: session.user});
+        res.render('dashboard', {user_info: session.user, expressFlash: req.flash('success')});
     }
 });
 
@@ -84,7 +84,10 @@ app.post('/user/add', function(req, res) {
             
             User.create(data, function(err, user){
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
+                    for (var key in err.errors) {
+                        req.flash('success', err.errors[key].message);
+                    }
                     res.redirect('/');
                 } else {
                     console.log('User created!', user);
@@ -102,22 +105,30 @@ app.post('/user/add', function(req, res) {
 });
 
 app.post('/user/login', function(req, res) {
-    // need to add unhashing here!
-    // need to add flash message here!
-    User.find({email: req.body.login_email}, function(err, user) {
+    User.find({email: req.body.login_email}, function(err, user){
         if (user.length < 1) {
-            console.log('user not found');
+            console.log('User not found');
+            req.flash('success', 'User not found.');
             res.redirect('/');
         } else {
-           if (user[0].password == req.body.login_password) {
+            bcrypt.compare(req.body.login_password, user[0].password)
+            .then(result => {
+                if (result == true) {
                     console.log('login successful');
                     session.user = user[0];
                     session.login = true;
+                    req.flash('success', 'Login Successful.');
                     res.redirect('/user/dashboard');
-            } else {
-                console.log('User password incorrect');
+                } else {
+                    console.log('User password incorrect');
+                    req.flash('success', 'Wrong password.');
+                    res.redirect('/');
+                }
+            })
+            .catch(error => {
+                console.log(error);
                 res.redirect('/');
-            }
+            });
         }
     });
 });

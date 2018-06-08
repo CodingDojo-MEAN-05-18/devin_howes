@@ -10,13 +10,12 @@
 <body>
     <div id="container">
         <div id="errors">
-            <% if(messages.registration) { %>
-                <ul>
-                <% for (var x of messages.registration) { %>
-                <li class='flash-message'><%= x %></li>
+        <% if ( expressFlash.length > 0 ) { %>
+                <% for (var x = 0; x < expressFlash.length; x++) { %>
+                <li><%= expressFlash[x] %></li>
                 <% } %>
                 </ul>
-            <% } %>
+        <% } %>
         </div>
         <div id="registration">
             <fieldset>
