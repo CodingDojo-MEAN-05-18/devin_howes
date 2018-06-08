@@ -8,6 +8,15 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <div id="errors">
+        <% if(messages.errors) { %>
+            <ul>
+            <% for (var x of messages.errors) { %>
+            <li class='flash-message'><%= x %></li>
+            <% } %>
+            </ul>
+        <% } %>
+    </div>
     <h1>Hello, <%= user_info.first_name %></h1>
     <a href="/user/logout">Logout</a>
     <h3>Details About You:</h3>

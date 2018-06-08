@@ -67,7 +67,6 @@ app.get('/', function(req, res) {
 });
 
 app.get('/user/dashboard', function(req, res) {
-    console.log(req.session.user);
     if (session.login == false) {
         console.log("You don't have persmission!");
         res.redirect('/');
@@ -77,27 +76,29 @@ app.get('/user/dashboard', function(req, res) {
 });
 
 app.post('/user/add', function(req, res) {
-    const data = req.body;
+    let data = req.body;
 
-    // Hash Password before saving!!
-    
-    // Save user
-    User.create(data, function (err, user) {
-        if (err) {
-            console.log('Something went wrong saving user', err);
-        } else {
-            console.log('User created!');
-            User.find({email: data.email}, function(err, user) {
+    bcrypt.hash(req.body.password, 10)
+        .then(hashed_password => {
+            data.password = hashed_password;
+            
+            User.create(data, function(err, user){
                 if (err) {
-                    console.log('Something went wrong getting user');
+                    console.log(err);
+                    res.redirect('/');
                 } else {
+                    console.log('User created!', user);
+                    session.user = user;
                     session.login = true;
-                    session.user = user[0];
+                    console.log(session.login, session.user);
+                    res.redirect('/user/dashboard');
                 }
             });
-            res.redirect('/user/dashboard');
-        }
-    });
+        })
+        .catch(error => {
+            console.log(error);
+            res.redirect('/');
+        });
 });
 
 app.post('/user/login', function(req, res) {
@@ -124,6 +125,7 @@ app.post('/user/login', function(req, res) {
 app.get('/user/logout', function(req, res) {
     req.session.destroy();
     session.login = false;
+    session.user = '';
     res.redirect('/');
 });
 
