@@ -10,5 +10,23 @@
 <body>
     <h1>Hello, <%= user_info.first_name %></h1>
     <a href="/user/logout">Logout</a>
+    <h3>Details About You:</h3>
+    <ul>
+        <li>First Name:
+            <%= user_info.first_name %>
+        </li>
+        <li>Last Name:
+            <%= user_info.last_name %>
+        </li>
+        <li>E-mail:
+            <%= user_info.email %>
+        </li>
+        <li>Birthday:
+            <%= user_info.birthday %>
+        </li>
+        <li>Last Updated:
+            <%= user_info.updatedAt %>
+        </li>
+    </ul>
 </body>
 </html>

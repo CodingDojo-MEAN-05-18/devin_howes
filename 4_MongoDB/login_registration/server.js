@@ -20,6 +20,7 @@ app.use(session({
 
 // default session login value:
 session.login = false;
+session.user = '';
 
 const flash = require('express-flash');
 app.use(flash());
@@ -71,9 +72,9 @@ app.get('/user/dashboard', function(req, res) {
         console.log("You don't have persmission!");
         res.redirect('/');
     } else {
-        res.render('dashboard', {user_info: req.session.user});
+        res.render('dashboard', {user_info: session.user});
     }
-})
+});
 
 app.post('/user/add', function(req, res) {
     const data = req.body;
@@ -86,12 +87,12 @@ app.post('/user/add', function(req, res) {
             console.log('Something went wrong saving user', err);
         } else {
             console.log('User created!');
-            User.findOne({email: data.email}, function(err, user) {
+            User.find({email: data.email}, function(err, user) {
                 if (err) {
                     console.log('Something went wrong getting user');
                 } else {
-                    req.session.login = true;
-                    req.session.id = user._id;
+                    session.login = true;
+                    session.user = user[0];
                 }
             });
             res.redirect('/user/dashboard');
@@ -109,7 +110,7 @@ app.post('/user/login', function(req, res) {
         } else {
            if (user[0].password == req.body.login_password) {
                     console.log('login successful');
-                    req.session.user = user[0];
+                    session.user = user[0];
                     session.login = true;
                     res.redirect('/user/dashboard');
             } else {
