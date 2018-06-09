@@ -18,7 +18,8 @@
         <p>Last updated at: <%= wolves[x].updatedAt %> </p>
         <p>
             <a href="/">Home</a> |
-            <a href="/wolves/edit/<%= wolves[x].id %>">Edit</a>
+            <a href="/wolves/edit/<%= wolves[x].id %>">Edit</a> |
+            <a href="/wolves/destroy/<%= wolves[x].id %>">Delete</a>
         </p>
     <% } %>
 </body>
