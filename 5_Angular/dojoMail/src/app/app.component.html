@@ -13,8 +13,8 @@
       <tr *ngFor = 'let email of emails'>
         <td [ngClass]="{'td': true}" >{{ email.email | lowercase }}</td>
         <td [ngClass]="{'td': true}" >
-          <span *ngIf='email.important == true' >High</span>
-          <span *ngIf='email.important == false' >Low</span>
+          <span *ngIf='email.important' >High</span>
+          <span *ngIf='!email.important' >Low</span>
         </td>
         <td [ngClass]="{'td': true}" >{{ email.subject }}</td>
         <td [ngClass]="{'td': true}" >{{ email.content }}</td>
