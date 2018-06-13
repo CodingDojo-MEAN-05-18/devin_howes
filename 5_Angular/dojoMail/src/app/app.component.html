@@ -1,7 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div [ngClass]="{'body': true}">
   <h1>
-    {{ title }}!
+    {{ title }}
   </h1>
   <table>
     <thead>
@@ -12,11 +11,14 @@
     </thead>
     <tbody>
       <tr *ngFor = 'let email of emails'>
-        <td>{{ email.email | lowercase }}</td>
-        <td>{{ email.important }}</td>
-        <td>{{ email.subject }}</td>
-        <td>{{ email.content }}</td>
+        <td [ngClass]="{'td': true}" >{{ email.email | lowercase }}</td>
+        <td [ngClass]="{'td': true}" >
+          <span *ngIf='email.important == true' >High</span>
+          <span *ngIf='email.important == false' >Low</span>
+        </td>
+        <td [ngClass]="{'td': true}" >{{ email.subject }}</td>
+        <td [ngClass]="{'td': true}" >{{ email.content }}</td>
       </tr>
     </tbody>
   </table>
-  
+</div>
