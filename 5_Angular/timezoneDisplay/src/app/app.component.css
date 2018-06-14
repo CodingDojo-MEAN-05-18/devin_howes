@@ -1,0 +1,13 @@
+.selected {
+    background-color: yellow;
+}
+
+div {
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+button {
+    margin-left: 10px;
+}
