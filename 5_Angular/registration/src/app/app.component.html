@@ -45,14 +45,22 @@
               type="text"
               name="lastName"
               required
-              minlength="4"
+              minlength="2"
               maxlength="24"
               [(ngModel)]=user.lastName
               #lastName='ngModel'
             />
           </td>
           <td>
-            {{ lastName.errors | json }}
+            <!-- {{ lastName.errors | json }} -->
+            <div *ngIf='(lastName.touched || lastName.dirty ) && lastName.errors'>
+                <div *ngIf='lastName.errors.required'>
+                  Last Name is Required!
+                </div>
+                <div *ngIf='lastName.errors.minlength'>
+                  Last Name must be at least {{ lastName.errors.minlength.requiredLength }} characters!
+                </div>
+              </div>
           </td>
         </tr>
         <tr>
@@ -64,15 +72,25 @@
               type="text"
               name="email"
               required
-              minlength="4"
-              maxlength="24"
+              minlength="6"
               pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})"
               [(ngModel)]=user.email
               #email='ngModel'
             />
           </td>
           <td>
-            {{ email.errors | json }}
+            <!-- {{ email.errors | json }} -->
+            <div *ngIf='(email.touched || email.dirty ) && email.errors'>
+                <div *ngIf='email.errors.required'>
+                  Email is Required!
+                </div>
+                <div *ngIf='email.errors.minlength'>
+                  Email must be at least {{ email.errors.minlength.requiredLength }} characters!
+                </div>
+                <div *ngIf='email.errors.pattern'>
+                  Email format is invalid (Try: something@domain.com)
+                </div>
+              </div>
           </td>
         </tr>
         <tr>
