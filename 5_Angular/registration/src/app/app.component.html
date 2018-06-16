@@ -7,7 +7,7 @@
     <legend>
       Account Information
     </legend>
-    <form (submit)="onSubmit($event)" #formData='ngForm'>
+    <form (submit)="form.valid && onSubmit($event, form)" #formData='ngForm'>
       <table>
         <tr>
           <td>
@@ -18,14 +18,22 @@
               type="text"
               name="firstName"
               required
-              minlength="4"
+              minlength="3"
               maxlength="24"
               [(ngModel)]=user.firstName
               #firstName='ngModel'
             />
           </td>
           <td>
-            {{ firstName.errors | json }}
+            <!-- {{ firstName.errors | json }} -->
+            <div *ngIf='(firstName.touched || firstName.dirty ) && firstName.errors'>
+              <div *ngIf='firstName.errors.required'>
+                First Name is Required!
+              </div>
+              <div *ngIf='firstName.errors.minlength'>
+                First Name must be at least {{ firstName.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
