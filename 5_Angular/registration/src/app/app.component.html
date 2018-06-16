@@ -118,9 +118,6 @@
               <div *ngIf='password.errors.minlength'>
                 Password must be at least {{ password.errors.minlength.requiredLength }} characters!
               </div>
-              <div *ngIf='(passwordConf.touched || passwordConf.dirty) && passwordConf.value != password.value'>
-                Password doesn't match confirmation!
-              </div>
             </div>
           </td>
         </tr>
@@ -170,7 +167,15 @@
             />
           </td>
           <td>
-            {{ streetAddress.errors | json }}
+            <!-- {{ streetAddress.errors | json }} -->
+            <div *ngIf='(streetAddress.touched || streetAddress.dirty ) && streetAddress.errors'>
+              <div *ngIf='streetAddress.errors.required'>
+                Address is Required!
+              </div>
+              <div *ngIf='streetAddress.errors.minlength'>
+                Address must be at least {{ streetAddress.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -203,7 +208,15 @@
             />
           </td>
           <td>
-            {{ city.errors | json }}
+            <!-- {{ city.errors | json }} -->
+            <div *ngIf='(city.touched || city.dirty ) && city.errors'>
+              <div *ngIf='city.errors.required'>
+                City Name is Required!
+              </div>
+              <div *ngIf='city.errors.minlength'>
+                City must be at least {{ city.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -220,7 +233,12 @@
             />
           </td>
           <td>
-            {{ state.errors | json }}
+            <!-- {{ state.errors | json }} -->
+            <div *ngIf='(state.touched || state.dirty ) && state.errors'>
+              <div *ngIf='state.errors.required'>
+                State is Required!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -248,7 +266,12 @@
             No
           </td>
           <td>
-            {{ lucky.errors | json }}
+            <!-- {{ lucky.errors | json }} -->
+            <div *ngIf='(lucky.touched || lucky.dirty ) && lucky.errors'>
+              <div *ngIf='lucky.errors.required'>
+                Are you feeling lucky? Tell us!
+              </div>
+            </div>
           </td>
         </tr>
       </table>
