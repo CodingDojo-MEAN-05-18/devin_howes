@@ -54,13 +54,13 @@
           <td>
             <!-- {{ lastName.errors | json }} -->
             <div *ngIf='(lastName.touched || lastName.dirty ) && lastName.errors'>
-                <div *ngIf='lastName.errors.required'>
-                  Last Name is Required!
-                </div>
-                <div *ngIf='lastName.errors.minlength'>
-                  Last Name must be at least {{ lastName.errors.minlength.requiredLength }} characters!
-                </div>
+              <div *ngIf='lastName.errors.required'>
+                Last Name is Required!
               </div>
+              <div *ngIf='lastName.errors.minlength'>
+                Last Name must be at least {{ lastName.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -81,16 +81,16 @@
           <td>
             <!-- {{ email.errors | json }} -->
             <div *ngIf='(email.touched || email.dirty ) && email.errors'>
-                <div *ngIf='email.errors.required'>
-                  Email is Required!
-                </div>
-                <div *ngIf='email.errors.minlength'>
-                  Email must be at least {{ email.errors.minlength.requiredLength }} characters!
-                </div>
-                <div *ngIf='email.errors.pattern'>
-                  Email format is invalid (Try: something@domain.com)
-                </div>
+              <div *ngIf='email.errors.required'>
+                Email is Required!
               </div>
+              <div *ngIf='email.errors.minlength'>
+                Email must be at least {{ email.errors.minlength.requiredLength }} characters!
+              </div>
+              <div *ngIf='email.errors.pattern'>
+                Email format is invalid (Try: something@domain.com)
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -110,7 +110,18 @@
             />
           </td>
           <td>
-            {{ password.errors | json }}
+            <!-- {{ password.errors | json }} -->
+            <div *ngIf='(password.touched || password.dirty ) && password.errors'>
+              <div *ngIf='password.errors.required'>
+                Password is Required!
+              </div>
+              <div *ngIf='password.errors.minlength'>
+                Password must be at least {{ password.errors.minlength.requiredLength }} characters!
+              </div>
+              <div *ngIf='(passwordConf.touched || passwordConf.dirty) && passwordConf.value != password.value'>
+                Password doesn't match confirmation!
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -130,7 +141,18 @@
             />
           </td>
           <td>
-            {{ passwordConf.errors | json }}
+            <!-- {{ passwordConf.errors | json }} -->
+            <div *ngIf='(passwordConf.touched || passwordConf.dirty) && passwordConf.errors'>
+              <div *ngIf='passwordConf.errors.required'>
+                Password Confirmation is Required!
+              </div>
+              <div *ngIf='passwordConf.errors.minlength'>
+                Password Confirmation must be at least {{ passwordConf.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
+            <div *ngIf='(passwordConf.touched || passwordConf.dirty) && passwordConf.value != password.value'>
+              Password doesn't match confirmation!
+            </div>
           </td>
         </tr>
         <tr>
