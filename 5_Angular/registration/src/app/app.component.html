@@ -285,7 +285,7 @@
           </td>
         </tr>
       </table>
-      <input type="submit" value="Register" *ngIf="formData.valid">
+      <input type="submit" value="Register" [disabled]="!formData.valid">
     </form>
   </fieldset>
 </div>
@@ -293,5 +293,5 @@
 <div>
   {{ users | json }}
   <hr>
-  {{ formData.submitted }}
+  {{ formData.pristine }}
 </div>

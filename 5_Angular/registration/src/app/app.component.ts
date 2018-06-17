@@ -16,5 +16,6 @@ export class AppComponent {
     console.log(form);
     this.users.push(this.user);
     this.user = new User();
+    this.registrationForm.reset();
   }
 }
