@@ -2,12 +2,22 @@
   <h1>{{ title }}</h1>
 </div>
 
+<div *ngIf="formData.valid == true && formData.submitted == true">
+  <!-- <p *ngFor='let x of users'>
+    Thank you for registering with us {{ users[x].firstName }}! We have a sent a cofirmation email to {{ users[x].email }} and will send all snail mail to:
+    {{ users[x].streetAddress }}, {{ users[x].city }} {{ users[x].state }}.
+  </p> -->
+  <p>
+    Have a wonderful day!
+  </p>
+</div>
+
 <div class="container">
   <fieldset>
     <legend>
       Account Information
     </legend>
-    <form (submit)="form.valid && onSubmit($event, form)" #formData='ngForm'>
+    <form (submit)="onSubmit($event, form)" #formData='ngForm'>
       <table>
         <tr>
           <td>
@@ -275,11 +285,13 @@
           </td>
         </tr>
       </table>
-      <input type="submit" value="Register">
+      <input type="submit" value="Register" *ngIf="formData.valid">
     </form>
   </fieldset>
 </div>
 
 <div>
   {{ users | json }}
+  <hr>
+  {{ formData.submitted }} {{ formData.valid }}
 </div>

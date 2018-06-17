@@ -11,8 +11,9 @@ export class AppComponent {
   title = 'Registration';
   user = new User();
   users = [];
-  onSubmit(event) {
+  onSubmit(event, form) {
     event.preventDefault();
+    console.log(form);
     this.users.push(this.user);
     this.user = new User();
   }
