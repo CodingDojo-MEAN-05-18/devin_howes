@@ -3,9 +3,9 @@
 </div>
 
 <div *ngIf="formData.submitted">
-  <p *ngFor='let user of users'>
-    Thank you for registering with us {{ user.firstName }}! We have a sent a cofirmation email to {{ user.email }} and will send all snail mail to:
-    {{ user.streetAddress }}, {{ user.city }} {{ user.state }}.
+  <p>
+    Thank you for registering with us {{ name }}! We have a sent a cofirmation email to {{ userEmail }} and will send all snail mail to:
+    {{ address }}.
   </p>
   <p>
     Have a wonderful day!
@@ -17,7 +17,7 @@
     <legend>
       Account Information
     </legend>
-    <form (submit)="onSubmit($event, form)" #formData='ngForm'>
+    <form (submit)="onSubmit($event, formData)" #formData='ngForm'>
       <table>
         <tr>
           <td>
@@ -114,7 +114,7 @@
               required
               minlength="6"
               maxlength="24"
-              pattern="^([a-zA-Z0-9@*#]{6,24})$"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,24}$"
               [(ngModel)]=user.password
               #password='ngModel'
             />
@@ -127,6 +127,9 @@
               </div>
               <div *ngIf='password.errors.minlength'>
                 Password must be at least {{ password.errors.minlength.requiredLength }} characters!
+              </div>
+              <div *ngIf='password.errors.pattern'>
+                Password must contain one letter and one number!
               </div>
             </div>
           </td>
@@ -142,7 +145,7 @@
               required
               minlength="6"
               maxlength="24"
-              pattern="^([a-zA-Z0-9@*#]{6,24})$"
+              pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,24}$"
               [(ngModel)]=user.passwordConf
               #passwordConf='ngModel'
             />
@@ -288,10 +291,4 @@
       <input type="submit" value="Register" [disabled]="!formData.valid">
     </form>
   </fieldset>
-</div>
-
-<div>
-  {{ users | json }}
-  <hr>
-  {{ formData.pristine }}
 </div>

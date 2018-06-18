@@ -10,12 +10,22 @@ import { User } from './user';
 export class AppComponent {
   title = 'Registration';
   user = new User();
-  users = [];
-  onSubmit(event, form) {
-    event.preventDefault();
-    console.log(form);
-    this.users.push(this.user);
-    this.user = new User();
-    this.registrationForm.reset();
+  name: string = '';
+  userEmail: string = '';
+  address: string = '';
+  onSubmit(event, formData) {
+    if (formData.valid) {
+      console.log(formData);
+      event.preventDefault();
+      this.name = `${this.user.firstName} ${this.user.lastName}`;
+      this.userEmail = `${this.user.email}`;
+      this.address = `${this.user.streetAddress} ${this.user.address2} ${this.user.city}, ${this.user.state}`;
+      this.user = new User();
+      formData.reset();
+    } else {
+      this.name = '';
+      this.userEmail = '';
+      this.address = '';
+    }
   }
 }
