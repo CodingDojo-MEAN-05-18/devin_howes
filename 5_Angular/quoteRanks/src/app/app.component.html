@@ -8,30 +8,31 @@
     <legend>
       Add a Quote
     </legend>
-    <form (submit)="onSubmit($event, formData)" #formData='ngForm'>
+    <form (submit)="onSubmit($event, formData)" #formData="ngForm">
       <table>
         <tr>
           <td>
-            <label for="author">Author: </label>
+            <label>Author: </label>
           </td>
           <td>
             <input
               type="text"
               name="author"
+              class="form-control"
               required
               minlength="1"
-              [(ngModel)]='quote.author'
-              #author='ngModel'
+              [(ngModel)]="quote.author"
+              #author="ngModel"
             />
           </td>
           <td>
             <!-- Author Validations -->
             <div *ngIf='(author.touched || author.dirty) && author.errors'>
-              {{ author.errors | json }}
-              <div *ngIf='author.errors.required'>
+              <!-- {{ author.errors | json }} -->
+              <div *ngIf='author.errors.required' class="alert alert-danger">
                 Author name is required!
               </div>
-              <div *ngIf='author.errors.minlength'>
+              <div *ngIf='author.errors.minlength' class="alert alert-danger">
                 Author name must be at least {{ author.errors.minlength.requiredLength }} characters!
               </div>
             </div>
@@ -39,34 +40,43 @@
         </tr>
         <tr>
           <td>
-            <label for="quote">Quote: </label>
+            <label>Quote: </label>
           </td>
           <td>
-            <input
-              type="text"
-              name="quote"
+            <textarea
+              name="content"
+              class="form-control"
+              rows="5"
               required
               minlength="4"
-              [(ngModel)]='quote.quote'
-              #quote='ngModel'
-            />
+              [(ngModel)]="quote.content"
+              #content="ngModel"
+            >
+            </textarea>
           </td>
           <td>
             <!-- Quote validations -->
-            <div *ngIf='(quote.touched || quote.dirty) && quote.errors'>
-              {{ quote.errors | json }}
-              <div *ngIf='quote.errors.required'>
+            <div *ngIf='(content.touched || content.dirty) && content.errors'>
+              <!-- {{ content.errors | json }} -->
+              <div *ngIf='content.errors.required' class="alert alert-danger">
                 Quote is required!
               </div>
-              <div *ngIf='quote.errors.minlength'>
-                Quote must be at least {{ quote.errors.minlength.requiredLength }} characters!
+              <div *ngIf='content.errors.minlength' class="alert alert-danger">
+                Quote must be at least {{ content.errors.minlength.requiredLength }} characters!
               </div>
             </div>
           </td>
         </tr>
+        <tr>
+          <td>
+            <!-- Placeholder -->
+          </td>
+          <td>
+            <!-- Keep button to submit grayed until form is valid -->
+            <input type="submit" class="btn btn-success" style="float:right" value="Add Quote" [disabled]='!formData.valid'>
+          </td>
+        </tr>
       </table>
-      <!-- Keep button to submit grayed until form is valid -->
-      <input type="submit" value="Add Quote" [disabled]='!formData.valid'>
     </form>
   </fieldset>
 </div>

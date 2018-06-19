@@ -11,14 +11,14 @@ export class AppComponent {
   title = 'Quote Ranks';
   quote = new Quote();
   quotes = [];
+
   onSubmit(event, formData) {
-    if (formData.valid) {
-      // console.log(formData);
-      event.preventDefault();
-      this.quotes.push(this.quote);
-      console.log(this.quotes);
-      this.quote = new Quote();
-      formData.reset();
-    }
+    event.preventDefault();
+    console.log(formData);
+
+    this.quotes.push(this.quote);
+
+    this.quote = new Quote();
+    formData.reset();
   }
 }
