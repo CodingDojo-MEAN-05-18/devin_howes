@@ -1,0 +1,33 @@
+<div class="row">
+    <label>Set Power Level: </label>
+    <input 
+        type="number" 
+        min="0"
+        max="100"
+        [(ngModel)]="powerLevel"
+    />
+</div>
+
+
+<div class="row">
+    <div class="card">
+        <app-human-component [powerLevel]="powerLevel"></app-human-component>
+    </div>
+    <div class="card">
+        <app-saiyan-component [powerLevel]="powerLevel"></app-saiyan-component>
+    </div>
+    <div class="card">
+        <app-super-saiyan-component [powerLevel]="powerLevel"></app-super-saiyan-component>
+    </div>
+</div>
+<div class="row">
+    <div class="card">
+        <app-super-saiyan-two-component [powerLevel]="powerLevel"></app-super-saiyan-two-component>
+    </div>
+    <div class="card">
+        <app-super-saiyan-three-component [powerLevel]="powerLevel"></app-super-saiyan-three-component>
+    </div>
+    <div class="card">
+        <app-super-saiyan-four-component [powerLevel]="powerLevel"></app-super-saiyan-four-component>
+    </div>
+</div>
