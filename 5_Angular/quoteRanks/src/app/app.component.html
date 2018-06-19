@@ -1,0 +1,76 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <h1>{{ title }}</h1>
+</div>
+
+<div>
+  <fieldset>
+    <legend>
+      Add a Quote
+    </legend>
+    <form (submit)="onSubmit($event, formData)" #formData='ngForm'>
+      <table>
+        <tr>
+          <td>
+            <label for="author">Author: </label>
+          </td>
+          <td>
+            <input
+              type="text"
+              name="author"
+              required
+              minlength="1"
+              [(ngModel)]='quote.author'
+              #author='ngModel'
+            />
+          </td>
+          <td>
+            <!-- Author Validations -->
+            <div *ngIf='(author.touched || author.dirty) && author.errors'>
+              {{ author.errors | json }}
+              <div *ngIf='author.errors.required'>
+                Author name is required!
+              </div>
+              <div *ngIf='author.errors.minlength'>
+                Author name must be at least {{ author.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="quote">Quote: </label>
+          </td>
+          <td>
+            <input
+              type="text"
+              name="quote"
+              required
+              minlength="4"
+              [(ngModel)]='quote.quote'
+              #quote='ngModel'
+            />
+          </td>
+          <td>
+            <!-- Quote validations -->
+            <div *ngIf='(quote.touched || quote.dirty) && quote.errors'>
+              {{ quote.errors | json }}
+              <div *ngIf='quote.errors.required'>
+                Quote is required!
+              </div>
+              <div *ngIf='quote.errors.minlength'>
+                Quote must be at least {{ quote.errors.minlength.requiredLength }} characters!
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- Keep button to submit grayed until form is valid -->
+      <input type="submit" value="Add Quote" [disabled]='!formData.valid'>
+    </form>
+  </fieldset>
+</div>
+
+<div id="quoteList">
+  {{ quotes | json }}
+</div>
