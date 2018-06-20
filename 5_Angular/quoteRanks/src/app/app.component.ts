@@ -10,13 +10,13 @@ import { Quote } from './quote';
 export class AppComponent {
   title = 'Quote Ranks';
   quote = new Quote();
-  quotes = [];
+  myQuotes = [];
 
   onSubmit(event, formData) {
     event.preventDefault();
     console.log(formData);
 
-    this.quotes.push(this.quote);
+    this.myQuotes.push(this.quote);
 
     this.quote = new Quote();
     formData.reset();
