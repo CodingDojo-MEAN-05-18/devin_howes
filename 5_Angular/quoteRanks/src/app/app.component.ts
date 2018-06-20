@@ -21,4 +21,8 @@ export class AppComponent {
     this.quote = new Quote();
     formData.reset();
   }
+
+  dataFromChild(eventData) {
+    console.log(eventData);
+  }
 }

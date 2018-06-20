@@ -82,5 +82,10 @@
 </div>
 
 <div id="quoteList">
-  <app-quotelist [myQuotes]='myQuotes'></app-quotelist>
+  <app-quotelist 
+    [myQuotes]='myQuotes'
+    (voteUpEmitter)="dataFromChild($event)"
+    (voteDownEmitter)="dataFromChild($event)"
+    (deleteEmitter)="dataFromChild($event)">
+  </app-quotelist>
 </div>
