@@ -22,7 +22,9 @@ export class AppComponent {
     formData.reset();
   }
 
-  dataFromChild(eventData) {
-    console.log(eventData);
+  deleteQuote(quote) {
+    console.log(quote);
+    const idx = this.myQuotes.indexOf(quote);
+    this.myQuotes.splice(idx, 1);
   }
 }

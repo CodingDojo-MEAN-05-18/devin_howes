@@ -84,8 +84,6 @@
 <div id="quoteList">
   <app-quotelist 
     [myQuotes]='myQuotes'
-    (voteUpEmitter)="dataFromChild($event)"
-    (voteDownEmitter)="dataFromChild($event)"
-    (deleteEmitter)="dataFromChild($event)">
+    (deleteEmitter)="deleteQuote($event)">
   </app-quotelist>
 </div>

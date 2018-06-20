@@ -9,23 +9,21 @@ import { Quote } from '../quote';
 })
 export class QuotelistComponent implements OnInit, OnChanges {
   @Input() myQuotes: Quote[];
-  @Output() voteUpEmitter = new EventEmitter();
-  @Output() voteDownEmitter = new EventEmitter();
   @Output() deleteEmitter = new EventEmitter();
 
   title = 'All Quotes';
   constructor() { }
 
-  upVote() {
-    this.voteUpEmitter.emit(this.myQuotes);
+  upVote(quote) {
+    quote.score++;
   }
 
-  downVote() {
-    this.voteDownEmitter.emit('Vote Down!');
+  downVote(quote) {
+    quote.score--;
   }
 
-  delete() {
-    this.deleteEmitter.emit('Delete!');
+  delete(quote) {
+    this.deleteEmitter.emit(quote);
   }
 
   ngOnInit() {
