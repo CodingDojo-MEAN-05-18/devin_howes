@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NinjaHandlerService } from '../ninja-handler.service';
 
 @Component({
   selector: 'app-status-feed',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusFeedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _ninjaHandler: NinjaHandlerService) { }
+  messages = [];
 
   ngOnInit() {
+    this.messages = this._ninjaHandler.statusFeed;
   }
 
 }
