@@ -10,7 +10,6 @@ export class NinjaHandlerService {
   constructor() { }
 
   displayGold() {
-    console.log(this.goldCount);
     return this.goldCount;
   }
 
