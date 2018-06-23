@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NinjaHandlerService } from '../ninja-handler.service';
 
 @Component({
   selector: 'app-locations',
@@ -6,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./locations.component.css']
 })
 export class LocationsComponent implements OnInit {
-  constructor() { }
+
+  constructor(private _ninjaHandler: NinjaHandlerService) { }
 
   ngOnInit() {
+  }
+
+  mineGold(data) {
+    console.log('Clicked button', data);
+    this._ninjaHandler.mineGold(data);
   }
 
 }

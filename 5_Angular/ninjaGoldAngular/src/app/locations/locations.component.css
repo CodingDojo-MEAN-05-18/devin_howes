@@ -1,0 +1,16 @@
+.location {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    vertical-align: top;
+    width: 200px;
+}
+
+button {
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px;
+}

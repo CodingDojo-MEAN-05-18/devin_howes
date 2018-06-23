@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private _ninjaHandler: NinjaHandlerService) { }
 
   ngOnInit() {
-    this.goldCount = this._ninjaHandler.goldCount;
+    this.goldCount = this._ninjaHandler.displayGold();
   }
+
 }
