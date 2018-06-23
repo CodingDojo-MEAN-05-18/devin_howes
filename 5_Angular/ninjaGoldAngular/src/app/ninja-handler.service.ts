@@ -31,7 +31,7 @@ export class NinjaHandlerService {
       this.statusFeed.push(`You've earned ${gold} at the ${data}!`);
       console.log(gold, this.goldCount);
     } else if (data === 'casino') {
-      const gold: number = this.getRandom(-100, 100);
+      const gold: number = this.getRandom(-100, 201);
       this.goldCount += gold;
       if (gold < 0) {
         this.statusFeed.push(`You've lost ${gold} at the ${data}! Try Again!`);
