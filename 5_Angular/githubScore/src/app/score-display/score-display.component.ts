@@ -6,7 +6,7 @@ import { GithubScoreService } from '../github-score.service';
   templateUrl: './score-display.component.html',
   styleUrls: ['./score-display.component.css']
 })
-export class ScoreDisplayComponent implements OnInit {
+export class ScoreDisplayComponent implements OnInit, DoCheck {
   userScore: any;
 
   constructor(private _githubScore: GithubScoreService) { }
@@ -14,4 +14,7 @@ export class ScoreDisplayComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngDoCheck() {
+    this.userScore = this._githubScore.displayScore();
+  }
 }
