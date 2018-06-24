@@ -10,19 +10,20 @@ export class GithubScoreService {
 
   constructor(private _http: HttpClient) { }
 
-  findUser() {
-    // hard coded username for initial dev remove and add userName as param
-    const userName: string = 'dphowes';
-
+  findUser(userName) {
     this._http.get(`https://api.github.com/users/${userName}`)
     .subscribe(
       (response) => {
-        console.log('Sucess!', response);
+        console.log(`Found User ${userName}`, response);
         this.user = response;
       },
       (error) => {
-        console.log('Error!', error);
+        console.log(`Error! ${userName} not found!`, error);
       }
     );
+  }
+
+  calculateScore() {
+    console.log('Calculate Score Method');
   }
 }

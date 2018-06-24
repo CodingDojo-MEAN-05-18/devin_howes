@@ -1,3 +1,20 @@
-<p>
-  score-form works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <form>
+        <div class="form-group">
+          <label>Find User: </label>
+          <input 
+          type="text"
+          name="user"
+          class="form-control"
+          [(ngModel)]="user">
+        </div>
+        <button (click)="findUser(user)" class="btn btn-primary">Calculate my GitHub Score</button>
+      </form>
+    </div>
+    <div class="col-sm">
+        <app-score-display></app-score-display>
+      </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubScoreService } from '../github-score.service';
 
 @Component({
   selector: 'app-score-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _githubScore: GithubScoreService) { }
 
   ngOnInit() {
+  }
+
+  findUser(data) {
+    console.log('Clicked button. Looking for: ', data);
+    this._githubScore.findUser(data);
   }
 
 }
