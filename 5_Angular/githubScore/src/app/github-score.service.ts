@@ -37,6 +37,20 @@ export class GithubScoreService {
   }
 
   displayScore() {
-    return this.userScore;
+    let statusMessage;
+    const score = this.userScore;
+
+    if (score < 20) {
+      statusMessage = 'Needs Work';
+    } else if (score < 50) {
+      statusMessage = 'A decent start!';
+    } else if (score < 100) {
+      statusMessage = 'Doing good!';
+    } else if (score < 200) {
+      statusMessage = 'Great job!';
+    } else if (score >= 200) {
+      statusMessage = 'Github Elite!';
+    }
+    return [score, statusMessage];
   }
 }
