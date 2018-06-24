@@ -1,7 +1,21 @@
 <hr>
 <div class="container">
   <div class="jumbotron">
-    <h3>Your Score: {{ userScore }}</h3>
-    <p>{{ statusMessage }}</p>
-  </div>
+    <h2>Your Score: {{ userScore }}</h2>
+
+    <h3 *ngIf="userScore <20" class="alert alert-danger">
+      Needs Work!
+    </h3>
+    <h3 *ngIf="userScore >=20 && userScore <50" class="alert alert-warning">
+      A Decent Start!
+    </h3>
+    <h3 *ngIf="userScore >=50 && userScore <100" class="alert alert-dark">
+      Doing Good!
+    </h3>
+    <h3 *ngIf="userScore >=100 && userScore <200" class="alert alert-success">
+      Great Job!
+    </h3>
+    <h3 *ngIf="userScore >= 200" class="alert alert-primary">
+      GitHub Elite!
+    </h3>
 </div>

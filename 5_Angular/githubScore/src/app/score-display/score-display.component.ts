@@ -8,7 +8,6 @@ import { GithubScoreService } from '../github-score.service';
 })
 export class ScoreDisplayComponent implements OnInit, DoCheck {
   userScore: any;
-  statusMessage: string;
 
   constructor(private _githubScore: GithubScoreService) { }
 
@@ -16,8 +15,7 @@ export class ScoreDisplayComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    this.userScore = this._githubScore.displayScore()[0];
-    this.statusMessage = this._githubScore.displayScore()[1];
+    this.userScore = this._githubScore.displayScore();
   }
 
 }
