@@ -13,9 +13,9 @@ export class ScoreFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  findUser(data) {
-    console.log('Clicked button. Looking for: ', data);
-    this._githubScore.findUser(data);
+  findUser(userName) {
+    console.log('Clicked button. Looking for: ', userName);
+    this._githubScore.findUser(userName);
   }
 
 }

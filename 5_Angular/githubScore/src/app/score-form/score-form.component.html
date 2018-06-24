@@ -1,16 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <form>
+      <form (submit)="findUser(user)" #formData="ngForm">
         <div class="form-group">
           <label>Find User: </label>
           <input 
           type="text"
-          name="user"
+          name="user-input"
           class="form-control"
-          [(ngModel)]="user">
+          placeholder="Please enter a user name"
+          required
+          [(ngModel)]="user"
+          >
         </div>
-        <button (click)="findUser(user)" class="btn btn-primary">Calculate my GitHub Score</button>
+        <button [disabled]='!formData.valid' class="btn btn-primary">Calculate my GitHub Score</button>
       </form>
     </div>
     <div class="col-sm">
