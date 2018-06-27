@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="jumbotron">
+    <h3>{{ title }}</h3>
+  </div>
+</div>
+<div class="container">
+    <a [routerLink]="['seattle']">Seattle, WA</a> |
+    <a [routerLink]="['sanjose']">San Jose, CA</a> |
+    <a [routerLink]="['burbank']">Burbank, CA</a> |
+    <a [routerLink]="['dallas']">Dallas, TX</a> |
+    <a [routerLink]="['dc']">Washington, DC</a> |
+    <a [routerLink]="['chicago']">Chicago, IL</a>
+    <hr>
+</div>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
