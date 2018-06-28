@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<!-- Text input as the search filter field. Type to filter automatically -->
+<input type="text" placeholder="Filter Names" [(ngModel)]='filter.name'>
+<!-- Button to clear field. Only shows when there is data in the filter field -->
+<button *ngIf='filter.name' (click)='filter.name = null' class="btn btn-primary">X</button>
+
+<!-- Display the names array. Use the search pipe -->
+<ul *ngFor='let name of names | search:filter'>
+  <li>{{ name.name }}</li>
+</ul>
