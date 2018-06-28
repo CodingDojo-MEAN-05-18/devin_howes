@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'dallas', pathMatch: 'full', component: LocationComponent },
   { path: 'dc', pathMatch: 'full', component: LocationComponent },
   { path: 'chicago', pathMatch: 'full', component: LocationComponent },
+  { path: 'pittsburgh', pathMatch: 'full', component: LocationComponent },
   { path: '**', component: ErrorComponent},
 ];
 

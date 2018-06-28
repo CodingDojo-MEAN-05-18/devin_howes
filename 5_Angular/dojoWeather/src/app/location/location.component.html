@@ -1,3 +1,13 @@
 <p>
-  location works!
+  <!-- {{ object | json }} -->
 </p>
+
+<h4>{{ object.name }}</h4>
+<h5>Humidity: {{ object.main.humidity }}%</h5>
+<h5>Average Temperature: {{ object.averageTemp }} F</h5>
+<h5>High Temperature: {{ object.maxTemp }} F</h5>
+<h5>Low Temperature: {{ object.minTemp }} F</h5>
+<h5>Current Weather:</h5>
+<ul *ngFor="let condition of object.weather">
+  <li>{{ condition.main }}</li>
+</ul>

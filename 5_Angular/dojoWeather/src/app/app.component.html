@@ -4,12 +4,13 @@
   </div>
 </div>
 <div class="container">
-    <a [routerLink]="['seattle']">Seattle, WA</a> |
-    <a [routerLink]="['sanjose']">San Jose, CA</a> |
-    <a [routerLink]="['burbank']">Burbank, CA</a> |
-    <a [routerLink]="['dallas']">Dallas, TX</a> |
-    <a [routerLink]="['dc']">Washington, DC</a> |
-    <a [routerLink]="['chicago']">Chicago, IL</a>
+    <a (click)="setCity('seattle')" [routerLink]="['seattle']">Seattle, WA</a> |
+    <a (click)="setCity('sanjose')" [routerLink]="['sanjose']">San Jose, CA</a> |
+    <a (click)="setCity('burbank')" [routerLink]="['burbank']">Burbank, CA</a> |
+    <a (click)="setCity('dallas')" [routerLink]="['dallas']">Dallas, TX</a> |
+    <a (click)="setCity('dc')" [routerLink]="['dc']">Washington, DC</a> |
+    <a (click)="setCity('chicago')" [routerLink]="['chicago']">Chicago, IL</a> |
+    <a (click)="setCity('pittsburgh')" [routerLink]="['pittsburgh']">Pittsburgh, PA</a>
     <hr>
 </div>
 
