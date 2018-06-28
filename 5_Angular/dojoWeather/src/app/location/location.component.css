@@ -2,3 +2,9 @@ img {
     width: 300px;
     height: auto;
 }
+
+.col-6 {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}

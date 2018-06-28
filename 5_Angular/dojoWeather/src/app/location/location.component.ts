@@ -7,8 +7,7 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit, DoCheck {
-  cityName: string;
-  object: Location[] = [];
+  object: Location[];
 
   constructor(private weatherService: WeatherService) { }
 

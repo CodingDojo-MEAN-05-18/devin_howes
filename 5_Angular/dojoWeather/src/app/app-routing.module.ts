@@ -4,7 +4,7 @@ import { LocationComponent } from './location/location.component';
 import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'seattle' },
+  { path: '', pathMatch: 'full', redirectTo: 'pittsburgh' },
   { path: 'seattle', pathMatch: 'full', component: LocationComponent },
   { path: 'sanjose', pathMatch: 'full', component: LocationComponent },
   { path: 'burbank', pathMatch: 'full', component: LocationComponent },
