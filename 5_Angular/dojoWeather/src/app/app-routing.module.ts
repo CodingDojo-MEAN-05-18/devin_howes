@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LocationComponent } from './location/location.component';
 import { ErrorComponent } from './error/error.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'pittsburgh' },
+  { path: '', pathMatch: 'full', component: LandingComponent },
   { path: 'seattle', pathMatch: 'full', component: LocationComponent },
   { path: 'sanjose', pathMatch: 'full', component: LocationComponent },
   { path: 'burbank', pathMatch: 'full', component: LocationComponent },

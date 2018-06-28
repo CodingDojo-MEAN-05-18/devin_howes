@@ -9,12 +9,14 @@ import { LocationComponent } from './location/location.component';
 import { ErrorComponent } from './error/error.component';
 
 import { WeatherService } from './weather.service';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LocationComponent,
-    ErrorComponent
+    ErrorComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
