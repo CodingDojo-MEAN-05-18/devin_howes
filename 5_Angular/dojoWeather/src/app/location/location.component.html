@@ -1,13 +1,19 @@
-<p>
-  <!-- {{ object | json }} -->
-</p>
+<div class="row">
+  <h3>{{ object.name }}</h3>
+</div>
+<div class="row">
+  <div class="col-6">
+    <p><b>Humidity:</b> {{ object.main.humidity }}%</p>
+    <p><b>Average Temperature:</b> {{ object.averageTemp }} F</p>
+    <p><b>High Temperature:</b> {{ object.maxTemp }} F</p>
+    <p><b>Low Temperature:</b> {{ object.minTemp }} F</p>
+    <p><b>Current Weather:</b></p>
+    <ul *ngFor="let condition of object.weather">
+      <li>{{ condition.main }}</li>
+    </ul>
+  </div>
+  <div class="col-6">
+    <img src="../../assets/{{object.name | lowercase}}.jpg" alt="City Image">
+  </div>
+</div>
 
-<h4>{{ object.name }}</h4>
-<h5>Humidity: {{ object.main.humidity }}%</h5>
-<h5>Average Temperature: {{ object.averageTemp }} F</h5>
-<h5>High Temperature: {{ object.maxTemp }} F</h5>
-<h5>Low Temperature: {{ object.minTemp }} F</h5>
-<h5>Current Weather:</h5>
-<ul *ngFor="let condition of object.weather">
-  <li>{{ condition.main }}</li>
-</ul>
