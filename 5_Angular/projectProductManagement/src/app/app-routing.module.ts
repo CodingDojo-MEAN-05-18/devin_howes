@@ -18,19 +18,29 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'product-list',
+    path: 'products',
     pathMatch: 'full',
     component: ProductListComponent,
   },
   {
-    path: 'product/new',
+    path: 'products/new',
     pathMatch: 'full',
     component: NewProductComponent,
   },
   {
-    path: 'product-detail/:id',
+    path: 'products/create',
+    pathMatch: 'full',
+    redirectTo: 'products',
+  },
+  {
+    path: 'products/edit/:id',
     pathMatch: 'full',
     component: ProductDetailComponent,
+  },
+  {
+    path: 'products/destroy/:id',
+    pathMatch: 'full',
+    redirectTo: 'products',
   },
   {
     path: '**',

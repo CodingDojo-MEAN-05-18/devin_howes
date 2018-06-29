@@ -1,1 +1,43 @@
 <h3> Create a Product </h3>
+<section>
+    <fieldset>
+        <legend>Add a Product</legend>
+        {{ productForm.value | json }}
+        <form (submit)='onSubmit($event, productForm)' #productForm='ngForm'>
+            <div>
+                <label for="">Title</label>
+                <input 
+                    class="form-control" 
+                    type="text" 
+                    name='title' 
+                    required
+                    minlength="4"
+                    [(ngModel)]='product.title'
+                >
+            </div>
+            <div>
+                <label for="">Price</label>
+                <input 
+                    class="form-control"
+                    type="text"
+                    name='price'
+                    required
+                    [(ngModel)]='product.price'
+                >
+            </div>
+            <div>
+                <label for="">Image Location</label>
+                <input 
+                    class="form-control"
+                    type="url"
+                    name='imageUrl'
+                    [(ngModel)]='product.imageUrl'
+                >
+            </div>
+            <br>
+            <button class="btn btn-success" *ngIf='productForm.valid'>
+                Submit
+            </button>
+        </form>
+    </fieldset>
+</section>
