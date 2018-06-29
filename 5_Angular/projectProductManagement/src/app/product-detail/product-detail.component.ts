@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   sub: Subscription;
 
   constructor(
-    private productService: ProductHandlerService
+    private productService: ProductHandlerService,
     private router: Router) { }
 
   ngOnInit() {
@@ -27,24 +27,12 @@ export class ProductDetailComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onSubmit(event: Event, form: NgForm) {
-    event.preventDefault();
-    console.log(event);
-    // console.log('submitting form', this.product);
-
-    // this.sub = this.productService.createProduct(this.product)
-    //   .subscribe(product => {
-    //     console.log('product from API', product);
-    //     this.newProduct.emit(product);
-    //     this.product = new Product();
-    //     form.reset();
-    //     this.router.navigate(['products']);
-    //   });
-  }
-
-  onUpdate(productToUpdate: Product) {
-    console.log('updating product', productToUpdate);
-    // this.productService.updateProduct(productToUpdate);
+  onUpdate() {
+    this.productService.updateProduct(this.product)
+    .subscribe(updatedProduct => {
+      console.log('Updated product', updatedProduct);
+      this.router.navigate(['products']);
+    });
   }
 
   onDelete(productToDelete: Product) {

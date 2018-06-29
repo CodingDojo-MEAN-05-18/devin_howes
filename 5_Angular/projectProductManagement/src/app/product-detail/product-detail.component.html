@@ -1,7 +1,7 @@
 <section>
         <fieldset>
             <legend>Update Product {{ product.id }}</legend>
-            <form (submit)='onSubmit($event, productForm)' #productForm='ngForm'>
+            <form (submit)='onUpdate()' #updateForm='ngForm'>
                 <div>
                     <label for="">Title</label>
                     <input 
@@ -18,7 +18,7 @@
                     <label for="">Price</label>
                     <input 
                         class="form-control"
-                        type="text"
+                        type="number"
                         name='price'
                         value="{{ product.price }}"
                         required
@@ -36,7 +36,7 @@
                     >
                 </div>
                 <br>
-                <button class="btn btn-success" *ngIf='productForm.valid'>
+                <button class="btn btn-success" *ngIf='updateForm.valid'>
                     Update
                 </button>
                 <button class="btn btn-warning" [routerLink]="['delete',product.id]" (click)='onDelete(product.id)'>

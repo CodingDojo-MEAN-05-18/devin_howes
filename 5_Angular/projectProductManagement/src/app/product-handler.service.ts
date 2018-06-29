@@ -31,7 +31,7 @@ export class ProductHandlerService {
   }
 
   updateProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.base, product);
+    return this.http.put<Product>(`${this.base}/${product.id}`, product);
   }
 
   deleteProduct(product: Product): Observable<Product> {
