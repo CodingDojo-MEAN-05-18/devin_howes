@@ -8,7 +8,7 @@ import { Product } from './product';
 
 export class ProductHandlerService {
   // mockAPI for products
-  private base = 'http(s)://5b3594556005b00014c5dc2e.mockapi.io/products';
+  private base = 'https://5b3594556005b00014c5dc2e.mockapi.io/products';
 
   constructor(private http: HttpClient) { }
 

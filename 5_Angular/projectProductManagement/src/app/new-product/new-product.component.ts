@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { Product } from '../product';
 import { ProductHandlerService } from '../product-handler.service';
@@ -16,7 +17,9 @@ export class NewProductComponent implements OnInit, OnDestroy {
 
   @Output() newProduct = new EventEmitter<Product>();
 
-  constructor(private readonly productService: ProductHandlerService) {}
+  constructor(
+    private readonly productService: ProductHandlerService, 
+    private router: Router) {}
 
   ngOnInit() {}
 
@@ -36,6 +39,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
         this.newProduct.emit(product);
         this.product = new Product();
         form.reset();
+        this.router.navigate(['products']);
       });
   }
 }
