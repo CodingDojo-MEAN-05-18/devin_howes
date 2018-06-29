@@ -22,12 +22,12 @@ import { ProductHandlerService } from './product-handler.service';
     ProductDetailComponent,
     NewProductComponent,
     ErrorComponent,
-    FormsModule,
-    HttpClientModule,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [ProductHandlerService],
   bootstrap: [AppComponent]
