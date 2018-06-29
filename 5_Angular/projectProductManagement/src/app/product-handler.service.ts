@@ -21,6 +21,6 @@ export class ProductHandlerService {
   }
 
   deleteProduct(product: Product): Observable<Product> {
-    return this.http.delete<Product>(`${this.base}/${product.id}`);
+    return this.http.delete<Product>(`${this.base}/${product}`);
   }
 }

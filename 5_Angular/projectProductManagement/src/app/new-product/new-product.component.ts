@@ -18,7 +18,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
   @Output() newProduct = new EventEmitter<Product>();
 
   constructor(
-    private readonly productService: ProductHandlerService, 
+    private readonly productService: ProductHandlerService,
     private router: Router) {}
 
   ngOnInit() {}

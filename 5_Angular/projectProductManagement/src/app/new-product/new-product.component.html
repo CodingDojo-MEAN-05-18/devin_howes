@@ -2,7 +2,6 @@
 <section>
     <fieldset>
         <legend>Add a Product</legend>
-        {{ productForm.value | json }}
         <form (submit)='onSubmit($event, productForm)' #productForm='ngForm'>
             <div>
                 <label for="">Title</label>
@@ -29,7 +28,7 @@
                 <label for="">Image Location</label>
                 <input 
                     class="form-control"
-                    type="url"
+                    type="text"
                     name='imageUrl'
                     [(ngModel)]='product.imageUrl'
                 >

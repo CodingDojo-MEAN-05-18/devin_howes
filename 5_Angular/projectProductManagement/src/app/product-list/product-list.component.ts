@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(productToDelete: Product) {
-    console.log('Deleteing Product');
+    console.log('Deleteing Product', productToDelete);
     this.productService.deleteProduct(productToDelete)
       .subscribe(deletedProduct => {
         console.log('Deleted Product', deletedProduct);

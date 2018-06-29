@@ -33,7 +33,7 @@ const routes: Routes = [
     component: ProductDetailComponent,
   },
   {
-    path: 'products/destroy/:id',
+    path: 'products/delete/:id',
     pathMatch: 'full',
     redirectTo: 'products',
   },

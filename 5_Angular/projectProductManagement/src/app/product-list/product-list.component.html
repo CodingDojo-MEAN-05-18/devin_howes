@@ -6,13 +6,20 @@
             <th>Title</th>
             <th>Price</th>
             <th>Image</th>
+            <th>Actions</th>
         </thead>
         <tbody>
             <tr *ngFor='let product of products'>
                 <td>{{ product.id }}</td>
                 <td>{{ product.title | titlecase }}</td>
                 <td>{{ product.price | currency:'USD' }}</td>
-                <td>{{ product.urlImage }}</td>
+                <td>
+                    <img src="{{ product.imageUrl }}" alt="product image">
+                </td>
+                <td>
+                    <button class="btn btn-primary" [routerLink]="['edit', product.id]">Edit</button>
+                    <button class="btn btn-danger" [routerLink]="['delete',product.id]" (click)='onDelete(product.id)'>Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>
