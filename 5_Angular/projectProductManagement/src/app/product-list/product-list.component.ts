@@ -37,12 +37,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
     event.stopPropagation();
   }
 
+  productDetail(product: Product) {
+    this.productService.viewProduct(product);
+  }
+
   onDelete(productToDelete: Product) {
-    console.log('Deleteing Product', productToDelete);
+    // console.log('Deleteing Product', productToDelete);
     this.productService.deleteProduct(productToDelete)
       .subscribe(deletedProduct => {
         console.log('Deleted Product', deletedProduct);
 
+        // refilter the list to show all products minus the one deleted
         this.products = this.products.filter(product => product.id !== deletedProduct.id);
       });
   }

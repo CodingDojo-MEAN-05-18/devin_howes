@@ -9,6 +9,7 @@ import { Product } from './product';
 export class ProductHandlerService {
   // mockAPI for products
   private base = 'https://5b3594556005b00014c5dc2e.mockapi.io/products';
+  private productToEdit: any = [];
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +18,19 @@ export class ProductHandlerService {
   }
 
   createProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.base, product);
+  }
+
+  viewProduct(product: Product) {
+    console.log('controller received', product);
+    this.productToEdit = product;
+  }
+
+  displayProduct() {
+    return this.productToEdit;
+  }
+
+  updateProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.base, product);
   }
 

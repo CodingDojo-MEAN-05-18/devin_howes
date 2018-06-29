@@ -1,1 +1,47 @@
-<h3>Product Detail</h3>
+<section>
+        <fieldset>
+            <legend>Update Product {{ product.id }}</legend>
+            <form (submit)='onSubmit($event, productForm)' #productForm='ngForm'>
+                <div>
+                    <label for="">Title</label>
+                    <input 
+                        class="form-control" 
+                        type="text" 
+                        name='title' 
+                        value="{{ product.title }}"
+                        required
+                        minlength="4"
+                        [(ngModel)]='product.title'
+                    >
+                </div>
+                <div>
+                    <label for="">Price</label>
+                    <input 
+                        class="form-control"
+                        type="text"
+                        name='price'
+                        value="{{ product.price }}"
+                        required
+                        [(ngModel)]='product.price'
+                    >
+                </div>
+                <div>
+                    <label for="">Image Location</label>
+                    <input 
+                        class="form-control"
+                        type="text"
+                        name='imageUrl'
+                        value="{{ product.imageUrl }}"
+                        [(ngModel)]='product.imageUrl'
+                    >
+                </div>
+                <br>
+                <button class="btn btn-success" *ngIf='productForm.valid'>
+                    Update
+                </button>
+                <button class="btn btn-warning" [routerLink]="['delete',product.id]" (click)='onDelete(product.id)'>
+                        Delete
+                    </button>
+            </form>
+        </fieldset>
+    </section>

@@ -17,7 +17,7 @@
                     <img src="{{ product.imageUrl }}" alt="product image">
                 </td>
                 <td>
-                    <button class="btn btn-primary" [routerLink]="['edit', product.id]">Edit</button>
+                    <button class="btn btn-primary" [routerLink]="['edit', product.id]" (click)='productDetail(product)'>Edit</button>
                     <button class="btn btn-danger" [routerLink]="['delete',product.id]" (click)='onDelete(product.id)'>Delete</button>
                 </td>
             </tr>
