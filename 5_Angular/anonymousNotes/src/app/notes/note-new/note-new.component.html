@@ -1,0 +1,19 @@
+<div class="container">
+  <form (submit)='onSubmit($event, noteForm)' #noteForm='ngForm'>
+    <input 
+      class="form-control"
+      type="text"
+      placeholder="Enter a note!"
+      name="content"
+      required
+      [(ngModel)]='note.content'
+      >
+    <button class="btn btn-success" [disabled]='!noteForm.valid'>
+      Submit
+    </button>
+  </form>
+</div>
+
+<hr>
+
+<router-outlet></router-outlet>

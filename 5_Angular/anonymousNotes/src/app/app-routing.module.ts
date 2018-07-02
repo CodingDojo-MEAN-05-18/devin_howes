@@ -5,6 +5,7 @@ import { NoteResolve } from './resolvers/note-resolver';
 
 import { NoteListComponent } from './notes/note-list/note-list.component';
 import { NotFoundComponent } from './notes/not-found/not-found.component';
+import { NoteNewComponent } from './notes/note-new/note-new.component';
 
 const routes: Routes = [
   {
@@ -21,10 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        redirectTo: 'notes',
-        resolve: {
-          note: NoteResolve
-        }
+        component: NoteNewComponent,
       },
     ],
   },

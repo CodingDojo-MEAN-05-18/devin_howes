@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoteListComponent } from './notes/note-list/note-list.component';
 import { NotFoundComponent } from './notes/not-found/not-found.component';
+import { NoteNewComponent } from './notes/note-new/note-new.component';
 
 import { NoteService } from './services/note.service';
 import { NoteResolve } from './resolvers/note-resolver';
@@ -16,6 +17,7 @@ import { NoteResolve } from './resolvers/note-resolver';
     AppComponent,
     NoteListComponent,
     NotFoundComponent,
+    NoteNewComponent,
   ],
   imports: [
     BrowserModule,
