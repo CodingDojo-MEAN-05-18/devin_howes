@@ -38,6 +38,8 @@
           [(ngModel)]='player.position'
           #position='ngModel'
           >
+        <!-- Hidden input to default all players to "Undecided Status" -->
+        <input type="hidden" name="status" value="0">
         <br>
         <button class="btn btn-success" type="submit" [disabled]="!playerForm.valid">Add Player</button>
       </form>

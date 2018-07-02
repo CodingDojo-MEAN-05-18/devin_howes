@@ -18,8 +18,10 @@
       <tbody>
         <tr *ngFor='let player of players'>
           <td>{{ player.name | titlecase }}</td>
-          <td>{{ player.position }}</td>
-          <td>DELETE</td>
+          <td>{{ player.position | titlecase }}</td>
+          <td>
+            <button class="btn btn-danger" (click)='onDelete(player)'>DELETE</button>
+          </td>
         </tr>
       </tbody>
     </table>

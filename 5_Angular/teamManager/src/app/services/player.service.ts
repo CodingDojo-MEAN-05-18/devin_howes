@@ -24,7 +24,7 @@ export class PlayerService {
   }
 
   deletePlayer(player: Player): Observable<Player> {
-    return this.http.delete<Player>(`${this.base}/${player._id}`);
+    return this.http.delete<Player>(`${this.base}/${player.id}`);
   }
 
 }

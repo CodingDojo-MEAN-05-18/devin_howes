@@ -20,4 +20,14 @@ export class PlayerListComponent implements OnInit {
     });
   }
 
+  onDelete(playerToDelete: Player) {
+    console.log('Deleting player', playerToDelete.id);
+    this.playerService.deletePlayer(playerToDelete)
+      .subscribe(deletedPlayer => {
+        console.log('deleted player', deletedPlayer);
+
+        this.players = this.players.filter(player => player.id !== deletedPlayer.id);
+      });
+  }
+
 }
