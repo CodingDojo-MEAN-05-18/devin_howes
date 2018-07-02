@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>{{ title }}</h1>
+    <div class="container">
+      <a [routerLink]="['player', 'list']">Manager Players</a> | 
+      <a [routerLink]="['status', 'game', 1]">Manage Player Status</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
