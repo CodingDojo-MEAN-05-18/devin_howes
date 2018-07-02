@@ -16,10 +16,6 @@ export class NoteService {
     return this.http.get<Note[]>(this.base);
   }
 
-  getNote(id: string): Observable<Note> {
-    return this.http.get<Note>(`${this.base}/${id}`);
-  }
-
   createNote(note: Note): Observable<Note> {
     return this.http.post<Note>(this.base, note);
   }

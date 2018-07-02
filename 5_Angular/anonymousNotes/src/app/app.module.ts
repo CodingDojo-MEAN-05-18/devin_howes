@@ -10,7 +10,6 @@ import { NotFoundComponent } from './notes/not-found/not-found.component';
 import { NoteNewComponent } from './notes/note-new/note-new.component';
 
 import { NoteService } from './services/note.service';
-import { NoteResolve } from './resolvers/note-resolver';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import { NoteResolve } from './resolvers/note-resolver';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [NoteService, NoteResolve],
+  providers: [NoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

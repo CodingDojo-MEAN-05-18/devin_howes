@@ -22,7 +22,9 @@ export class NoteNewComponent implements OnInit, OnDestroy {
     private router: Router,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.noteService.getNotes();
+  }
 
   ngOnDestroy() {
     if (this.sub) {
@@ -37,8 +39,9 @@ export class NoteNewComponent implements OnInit, OnDestroy {
     this.sub = this.noteService.createNote(this.note)
       .subscribe(note => {
         console.log('note from api', note);
-        this.router.navigateByUrl('/');
         form.reset();
+        this.noteService.getNotes();
+        this.router.navigateByUrl('notes');
       });
   }
 
