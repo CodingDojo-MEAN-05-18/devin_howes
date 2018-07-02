@@ -14,10 +14,19 @@ const routes: Routes = [
   },
   {
     path: 'notes',
-    component: NoteListComponent,
-    resolve: {
-      note: NoteResolve
-    }
+    children: [
+      {
+        path: '',
+        component: NoteListComponent,
+      },
+      {
+        path: 'new',
+        redirectTo: 'notes',
+        resolve: {
+          note: NoteResolve
+        }
+      },
+    ],
   },
   {
     path: '**',

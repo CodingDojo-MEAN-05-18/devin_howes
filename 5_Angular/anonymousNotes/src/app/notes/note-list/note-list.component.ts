@@ -40,7 +40,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
     this.sub = this.noteService.createNote(this.note)
       .subscribe(note => {
         console.log('note from api', note);
-        this.router.navigateByUrl('notes');
+        this.router.navigateByUrl('/');
       });
   }
 
