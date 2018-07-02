@@ -8,7 +8,40 @@
   </div>
   <hr>
   <div class="container">
-    <p>placeholder</p>
+    <fieldset>
+      <form (submit)='onSubmit($event, playerForm)' #playerForm='ngForm'>
+        <label for="name">Player Name:</label>
+        <input
+          class="form-control" 
+          type="text" 
+          name="name"
+          required 
+          minlength="2"
+          [(ngModel)]='player.name'
+          #name='ngModel'
+        >
+        <div class="container">
+          <div *ngIf='(name.touched || name.dirty ) && name.errors'>
+            <div *ngIf='name.errors.required'>
+              Player Name is Required!
+            </div>
+            <div *ngIf='name.errors.minlength'>
+              Name must be at least {{ name.errors.minlength.requiredLength }} characters!
+            </div>
+          </div>
+        </div>
+        <label for="position">Preferred Position:</label>
+        <input 
+          class="form-control" 
+          type="text" 
+          name="position"
+          [(ngModel)]='player.position'
+          #position='ngModel'
+          >
+        <br>
+        <button class="btn btn-success" type="submit" [disabled]="!playerForm.valid">Add Player</button>
+      </form>
+    </fieldset>
   </div>
 </div>
     
