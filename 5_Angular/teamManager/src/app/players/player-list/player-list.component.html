@@ -6,8 +6,22 @@
     <a [routerLink]="['/', 'player', 'list']">List</a> | 
     <a [routerLink]="['/', 'player', 'addplayer']">Add</a>
   </div>
-  <hr>
+  <br>
+  <br>
   <div class="container">
-    <p>placeholder</p>
+    <table class="table table-striped">
+      <thead>
+        <th>Player</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor='let player of players'>
+          <td>{{ player.name | titlecase }}</td>
+          <td>{{ player.position }}</td>
+          <td>DELETE</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

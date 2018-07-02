@@ -34,7 +34,7 @@ export class PlayerManagerComponent implements OnInit {
     this.sub = this.playerService.createPlayer(this.player)
       .subscribe(player => {
         console.log('player from api', player);
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/player/list');
       });
   }
 
