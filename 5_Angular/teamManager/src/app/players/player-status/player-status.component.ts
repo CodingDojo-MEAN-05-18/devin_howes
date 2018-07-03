@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Player } from '../../player';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-player-status',
@@ -7,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerStatusComponent implements OnInit {
   gameId = 1;
+  players: Player[] = [];
+  sub: Subscription;
 
-  constructor() { }
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
+    this.sub = this.playerService.getPlayers().subscribe(players => {
+      this.players = players;
+    });
   }
 
   setGame(id) {

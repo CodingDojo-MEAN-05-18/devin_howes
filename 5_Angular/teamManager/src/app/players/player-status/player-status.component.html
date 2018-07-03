@@ -8,8 +8,25 @@
     <a (click)="setGame('3')" [routerLink]="['/', 'status', 'game', 3]">Game 3</a>
   </div>
   <hr>
-  <div class="container">
-    <p>placeholder</p>
+  <div class="container player-list">
+    <table class="table table-striped">
+      <thead>
+        <th>Player</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor='let player of players'>
+          <td>{{ player.name | titlecase }}</td>
+          <td>{{ player.position | titlecase }}</td>
+          <td>
+            <button>PLAYING</button>
+            <button>NOT PLAYING</button>
+            <button>UNDECIDED</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
