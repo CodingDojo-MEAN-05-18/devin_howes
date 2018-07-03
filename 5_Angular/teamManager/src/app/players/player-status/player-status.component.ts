@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Player } from '../../player';
 import { PlayerService } from '../../services/player.service';
 
@@ -9,11 +10,20 @@ import { PlayerService } from '../../services/player.service';
   styleUrls: ['./player-status.component.css']
 })
 export class PlayerStatusComponent implements OnInit {
-  gameId = 1;
+  gameId: string;
   players: Player[] = [];
+  player: Player = new Player();
   sub: Subscription;
 
-  constructor(private playerService: PlayerService) { }
+  constructor(
+    private playerService: PlayerService,
+    private route: ActivatedRoute,
+  ) {
+    this.route.paramMap.subscribe( params => {
+      this.gameId = params.get('id');
+      console.log('Modifying game', this.gameId);
+    });
+  }
 
   ngOnInit() {
     this.sub = this.playerService.getPlayers().subscribe(players => {
@@ -21,7 +31,29 @@ export class PlayerStatusComponent implements OnInit {
     });
   }
 
-  setGame(id) {
-    return this.gameId = id;
+  setStatus(playerId: string, status: string) {
+    this.player.id = playerId;
+
+    if (this.gameId === '1') {
+      this.player.statusOne = status;
+    } else if (this.gameId === '2') {
+      this.player.statusTwo = status;
+    } else if (this.gameId === '3') {
+      this.player.statusThree = status;
+    } else {
+      console.log('Error, invalid game number', this.gameId);
+    }
+
+    console.log(`Updating status for player id ${playerId} to status: ${status} in game number ${this.gameId}`);
+
+    const currentPlayer = this.playerService.getPlayer(playerId);
+    console.log(currentPlayer);
+
+    this.sub = this.playerService.updatePlayer(playerId, this.player)
+      .subscribe(player => {
+        console.log('updated player', player);
+      });
+
+    this.player = new Player();
   }
 }

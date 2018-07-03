@@ -7,7 +7,7 @@ import { Player } from '../player';
 @Injectable()
 export class PlayerService {
   // mock api for dev
-  private base = 'https://5b3ab73c45df9d0014c49bb6.mockapi.io/players/'
+  private base = 'https://5b3ab73c45df9d0014c49bb6.mockapi.io/players/';
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +17,10 @@ export class PlayerService {
 
   getPlayer(id: string): Observable<Player> {
     return this.http.get<Player>(`${this.base}/${id}`);
+  }
+
+  updatePlayer(id: string, player: Player): Observable<Player> {
+    return this.http.put<Player>(`${this.base}/${id}`, player);
   }
 
   createPlayer(players: Player): Observable<Player> {

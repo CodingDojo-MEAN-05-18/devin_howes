@@ -1,7 +1,9 @@
 export class Player {
-    id: number;
+    id: string;
     name: string;
     position: string;
-    status: string;
+    statusOne: string;
+    statusTwo: string;
+    statusThree: string;
     createdAt: Date = new Date();
 }
