@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../../player';
 import { PlayerService } from '../../services/player.service';
 
@@ -18,6 +18,7 @@ export class PlayerStatusComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.route.paramMap.subscribe( params => {
       this.gameId = params.get('id');
@@ -50,8 +51,11 @@ export class PlayerStatusComponent implements OnInit {
     console.log(currentPlayer);
 
     this.sub = this.playerService.updatePlayer(playerId, this.player)
-      .subscribe(player => {
-        console.log('updated player', player);
+      .subscribe(Updatedplayer => {
+        console.log('updated player', Updatedplayer);
+        this.sub = this.playerService.getPlayers().subscribe(players => {
+          this.players = players;
+        });
       });
 
     this.player = new Player();

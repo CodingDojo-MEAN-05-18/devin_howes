@@ -24,10 +24,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
-/*
-players/list
-players/add
-/status/game/1 , 2 , 3
-*/
