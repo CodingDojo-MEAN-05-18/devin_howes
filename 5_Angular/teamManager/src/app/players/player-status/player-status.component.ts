@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Player } from '../../player';
 import { PlayerService } from '../../services/player.service';
 
@@ -18,7 +18,6 @@ export class PlayerStatusComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private route: ActivatedRoute,
-    private router: Router,
   ) {
     this.route.paramMap.subscribe( params => {
       this.gameId = params.get('id');
@@ -27,13 +26,13 @@ export class PlayerStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sub = this.playerService.getPlayers().subscribe(players => {
-      this.players = players;
+    this.sub = this.playerService.getPlayers().subscribe(currentPlayers => {
+      this.players = currentPlayers;
     });
   }
 
   setStatus(playerId: string, status: string) {
-    this.player.id = playerId;
+    this.player._id = playerId;
 
     if (this.gameId === '1') {
       this.player.statusOne = status;

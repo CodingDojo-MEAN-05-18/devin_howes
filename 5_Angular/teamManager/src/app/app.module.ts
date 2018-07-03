@@ -13,8 +13,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 import {PlayerService } from './services/player.service';
 
-import { PlayerResolve } from './resolvers/player.resolve';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +27,7 @@ import { PlayerResolve } from './resolvers/player.resolve';
     FormsModule,
     HttpClientModule
   ],
-  providers: [PlayerService, PlayerResolve],
+  providers: [PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,10 +23,12 @@
         <div class="container">
           <div *ngIf='(name.touched || name.dirty ) && name.errors'>
             <div *ngIf='name.errors.required'>
-              Player Name is Required!
+              <p class="errors">Player Name is Required!</p>
             </div>
             <div *ngIf='name.errors.minlength'>
-              Name must be at least {{ name.errors.minlength.requiredLength }} characters!
+              <p class="errors">
+                Name must be at least {{ name.errors.minlength.requiredLength }} characters!
+              </p>
             </div>
           </div>
         </div>

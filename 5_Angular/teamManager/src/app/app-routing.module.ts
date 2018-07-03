@@ -8,7 +8,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'player', pathMatch: 'full' },
+  { path: '', redirectTo: 'player/list', pathMatch: 'full' },
   { path: 'player', children: [
     {path: 'list', component: PlayerListComponent},
     {path: 'addplayer', component: PlayerManagerComponent},

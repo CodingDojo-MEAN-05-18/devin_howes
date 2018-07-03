@@ -15,18 +15,19 @@ export class PlayerListComponent implements OnInit {
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
-    this.sub = this.playerService.getPlayers().subscribe(players => {
-      this.players = players;
+    this.sub = this.playerService.getPlayers().subscribe(player => {
+      this.players = player;
+      console.log(this.players);
     });
   }
 
   onDelete(playerToDelete: Player) {
-    console.log('Deleting player', playerToDelete.id);
+    console.log('Deleting player', playerToDelete._id);
     this.playerService.deletePlayer(playerToDelete)
       .subscribe(deletedPlayer => {
         console.log('deleted player', deletedPlayer);
 
-        this.players = this.players.filter(player => player.id !== deletedPlayer.id);
+        this.players = this.players.filter(player => player._id !== deletedPlayer._id);
       });
   }
 
