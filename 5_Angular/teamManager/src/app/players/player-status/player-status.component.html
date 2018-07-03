@@ -20,9 +20,15 @@
           <td>{{ player.name | titlecase }}</td>
           <td>{{ player.position | titlecase }}</td>
           <td>
-            <button (click)="setStatus(player.id, 'playing')">PLAYING</button>
-            <button (click)="setStatus(player.id, 'notplaying')">NOT PLAYING</button>
-            <button (click)="setStatus(player.id, 'undecided')">UNDECIDED</button>
+            <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusOne === 'playing'}" (click)="setStatus(player.id, 'playing')">
+              PLAYING
+            </button>
+            <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusOne === 'notplaying'}" (click)="setStatus(player.id, 'notplaying')">
+              NOT PLAYING
+            </button>
+            <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusOne === 'undecided'}" (click)="setStatus(player.id, 'undecided')">
+              UNDECIDED
+            </button>
           </td>
         </tr>
       </tbody>
