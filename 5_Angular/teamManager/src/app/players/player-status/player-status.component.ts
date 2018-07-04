@@ -32,7 +32,7 @@ export class PlayerStatusComponent implements OnInit {
   }
 
   setStatus(playerId: string, status: string) {
-    this.player._id = playerId;
+    this.player.id = playerId;
 
     if (this.gameId === '1') {
       this.player.statusOne = status;
@@ -50,13 +50,12 @@ export class PlayerStatusComponent implements OnInit {
     console.log(currentPlayer);
 
     this.sub = this.playerService.updatePlayer(playerId, this.player)
-      .subscribe(Updatedplayer => {
-        console.log('updated player', Updatedplayer);
+      .subscribe(updatedPlayer => {
+        console.log('updated player', updatedPlayer);
         this.sub = this.playerService.getPlayers().subscribe(players => {
           this.players = players;
-        });
       });
-
-    this.player = new Player();
+      this.player = new Player();
+    });
   }
 }

@@ -21,35 +21,35 @@
           <td>{{ player.position | titlecase }}</td>
           <td>
             <div *ngIf='gameId == 1'>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusOne === 'playing'}" (click)="setStatus(player._id, 'playing')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusOne === 'playing'}" (click)="setStatus(player.id, 'playing')">
                 PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusOne === 'notplaying'}" (click)="setStatus(player._id, 'notplaying')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusOne === 'notplaying'}" (click)="setStatus(player.id, 'notplaying')">
                 NOT PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusOne === 'undecided'}" (click)="setStatus(player._id, 'undecided')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusOne === 'undecided'}" (click)="setStatus(player.id, 'undecided')">
                 UNDECIDED
               </button>
             </div>
             <div *ngIf='gameId == 2'>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusTwo === 'playing'}" (click)="setStatus(player._id, 'playing')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusTwo === 'playing'}" (click)="setStatus(player.id, 'playing')">
                 PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusTwo === 'notplaying'}" (click)="setStatus(player._id, 'notplaying')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusTwo === 'notplaying'}" (click)="setStatus(player.id, 'notplaying')">
                 NOT PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusTwo === 'undecided'}" (click)="setStatus(player._id, 'undecided')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusTwo === 'undecided'}" (click)="setStatus(player.id, 'undecided')">
                 UNDECIDED
               </button>
             </div>
             <div *ngIf='gameId == 3'>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusThree === 'playing'}" (click)="setStatus(player._id, 'playing')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-success': player.statusThree === 'playing'}" (click)="setStatus(player.id, 'playing')">
                 PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusThree === 'notplaying'}" (click)="setStatus(player._id, 'notplaying')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-danger': player.statusThree === 'notplaying'}" (click)="setStatus(player.id, 'notplaying')">
                 NOT PLAYING
               </button>
-              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusThree === 'undecided'}" (click)="setStatus(player._id, 'undecided')">
+              <button [ngClass]="{'btn btn-secondary': true, 'btn-warning': player.statusThree === 'undecided'}" (click)="setStatus(player.id, 'undecided')">
                 UNDECIDED
               </button>
             </div>
