@@ -8,8 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "foreman": "./node_modules/.bin/nf start"
+    "foreman": "./node_modules/.bin/nf"
   },
+  "main": "server.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.0.3",
@@ -26,6 +27,7 @@
     "express": "^4.16.3",
     "foreman": "^3.0.1",
     "mongoose": "^5.2.0",
+    "morgan": "^1.9.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

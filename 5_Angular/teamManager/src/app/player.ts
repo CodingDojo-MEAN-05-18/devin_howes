@@ -1,5 +1,5 @@
 export class Player {
-    id: string;
+    _id: string;
     name: string;
     position: string;
     statusOne: string;
@@ -8,8 +8,6 @@ export class Player {
 
 
     constructor() {
-        // this.name = '';
-        // this.position = '';
         this.statusOne = 'undecided';
         this.statusTwo = 'undecided';
         this.statusThree = 'undecided';
