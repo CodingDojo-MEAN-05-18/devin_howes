@@ -1,3 +1,64 @@
-<p>
-  bike-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <!-- Search bar -->
+    <div class="col-12">
+      <div class="container">
+        <label for="search"><b>Search: </b></label>
+        <input class="search" type="text" placeholder="Search..." [(ngModel)]='filter.title'>
+        <button *ngIf='filter.title' (click)='filter.title = null' class="btn btn-primary">x</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listings -->
+  <div class="container" *ngFor='let bike of bikes | search:filter'>
+    <div class="listing">
+      <div class="row">
+        <div class="col-3">
+          <img src="{{ bike.img }}" alt="bike-image">
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <h4>{{ bike.title | titlecase }}</h4>
+          </div>
+          <div class="row">
+            <p>{{ bike.description }}</p>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="row">
+            <h5>{{ bike.price | currency:USD }}</h5>
+          </div>
+          <div class="row">
+            <p>{{ bike.location | titlecase }}</p>
+          </div>
+          <div class="row">
+            <button class="btn btn-danger" (click)="onDelete(bike)">Delete</button>
+            <button class="btn btn-primary" (click)="openModal(bike)">Contact</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Listing Owner Contact</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Owner ID: {{ bikeOwnerInfo.id }}</p>
+        <p>Name: {{ bikeOwnerInfo.name }}</p>
+        <p>Email: {{ bikeOwnerInfo.email }}</p>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+      </div> -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
