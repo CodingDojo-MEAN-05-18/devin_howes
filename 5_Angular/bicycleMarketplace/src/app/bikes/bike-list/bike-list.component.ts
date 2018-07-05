@@ -47,10 +47,13 @@ export class BikeListComponent implements OnInit, OnDestroy {
   openModal(bike) {
     this.display = 'block';
     this.bikeOwnerInfo.id = bike.ownerId;
+    // console.log(this.bikeOwnerInfo);
   }
 
   onCloseHandled() {
     this.display = 'none';
+    this.bikeOwnerInfo = {id: '', name: '', email: ''};
+    // console.log(this.bikeOwnerInfo);
   }
   // End Modal methods
 }
