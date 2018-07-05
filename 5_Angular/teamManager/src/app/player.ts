@@ -7,9 +7,9 @@ export class Player {
     statusThree: string;
 
 
-    constructor() {
-        this.statusOne = 'undecided';
-        this.statusTwo = 'undecided';
-        this.statusThree = 'undecided';
-    }
+    // constructor() {
+    //     this.statusOne = 'undecided';
+    //     this.statusTwo = 'undecided';
+    //     this.statusThree = 'undecided';
+    // }
 }

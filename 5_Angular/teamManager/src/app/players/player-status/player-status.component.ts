@@ -32,7 +32,7 @@ export class PlayerStatusComponent implements OnInit {
   }
 
   setStatus(playerId: string, status: string) {
-    this.player._id = playerId;
+    // this.player._id = playerId;
 
     if (this.gameId === '1') {
       this.player.statusOne = status;
@@ -44,12 +44,12 @@ export class PlayerStatusComponent implements OnInit {
       console.log('Error, invalid game number', this.gameId);
     }
 
-    console.log(`Updating status for player id ${this.player._id} to status: ${status} in game number ${this.gameId}`);
+    console.log(`Updating status for player id ${playerId} to status: ${status} in game number ${this.gameId}`);
 
-    const currentPlayer = this.playerService.getPlayer(this.player._id);
+    const currentPlayer = this.playerService.getPlayer(playerId);
     console.log(currentPlayer);
 
-    this.sub = this.playerService.updatePlayer(this.player._id, this.player)
+    this.sub = this.playerService.updatePlayer(playerId, this.player)
       .subscribe(updatedPlayer => {
         console.log('updated player', updatedPlayer);
         this.sub = this.playerService.getPlayers().subscribe(players => {

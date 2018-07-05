@@ -6,6 +6,6 @@ const router = require('express').Router();
 module.exports = router
   .get('/', playerController.index)
   .post('/', playerController.create)
-  .get('/:player._id', playerController.show)
-  .put('/:player._id', playerController.update)
-  .delete('/:player._id', playerController.destroy);
+  .get('/:player_id', playerController.show)
+  .put('/:player_id', playerController.update)
+  .delete('/:player_id', playerController.destroy);
