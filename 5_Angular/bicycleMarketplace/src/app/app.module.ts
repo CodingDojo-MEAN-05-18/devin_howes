@@ -14,7 +14,7 @@ import { RegisterComponent } from './home/register/register.component';
 
 import * as fromBikes from './bikes';
 
-import * as fromServices from './services';
+import { services } from './services';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BikeResolve } from './resolvers';
@@ -41,7 +41,7 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
     CookieModule.forRoot(),
   ],
-  providers: [...fromServices.services, BikeResolve, AuthGuard],
+  providers: [...services, BikeResolve, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

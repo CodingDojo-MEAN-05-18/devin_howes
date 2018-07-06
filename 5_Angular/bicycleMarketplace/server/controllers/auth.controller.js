@@ -9,6 +9,7 @@ module.exports = {
                     throw Error();
                 }
             return User.validatePassword(password, user.password).then(() => {
+                console.log('found', username, 'attempting to log in user:', user);
                 //handle login
                 completeLogin(request, response, user);
             });
@@ -27,25 +28,27 @@ module.exports = {
             .catch(console.log);
     },
     logout(request, response) {
-        console.log('logging out...', request.session);
+        console.log('logging out...', request.session.user);
         //clear session
         request.session.destroy();
+        console.log(request.session.user);
         //clear cookies
         response.clearCookie('userID');
         response.clearCookie('expiration');
         response.json(true);
-        console.log(request.session);
     }
 };
 
 function completeLogin(request, response, user) {
     //save user to session
     request.session.user = user.toObject();
+    console.log(request.session.user);
     //make sure password isn't saved in session
     delete request.session.user.password;
 
     //set cookies
     response.cookie('userID', user._id.toString());
     response.cookie('expiration', Date.now() + 86400 * 1000);
+
     response.json(user);
 }

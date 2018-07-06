@@ -23,7 +23,6 @@ export class BikeListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log(this.auth.userID);
     this.sub = this.bikeService.getBikes().subscribe(bikes => {
       this.bikes = bikes;
     });

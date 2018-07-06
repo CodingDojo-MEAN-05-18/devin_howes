@@ -1,9 +1,10 @@
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
+
 
 const port = process.env.PORT || 8000;
 const app = express();
@@ -29,8 +30,8 @@ app
   .use(logger('dev'))
   // step 13 in notes: tell express to use angular
   .use(express.static(path.join(__dirname, 'dist/bicycleMarketplace')))
-  .use(session(sessionConfig))
   .use(cookieParser(';alkdfjladjfldsajfhsad'))
+  .use(session(sessionConfig))  
   // step 12 in notes: add routes (next 2 lines)
   // step 17 in notes: add '/api' before require
   .use('/api', require('./server/routes'))
