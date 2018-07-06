@@ -13,6 +13,7 @@ import { BikeService } from '../../services';
 })
 export class BikeManageComponent implements OnInit, OnDestroy {
   bike = new Bike();
+  bikes: Bike[] = [];
   sub: Subscription;
 
   constructor(
@@ -21,6 +22,9 @@ export class BikeManageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.sub = this.bikeService.getBikes().subscribe(bikes => {
+      this.bikes = bikes;
+    });
   }
 
   ngOnDestroy() {
@@ -36,8 +40,22 @@ export class BikeManageComponent implements OnInit, OnDestroy {
     this.sub = this.bikeService.createBike(this.bike)
       .subscribe(bike => {
         console.log('bike from api', bike);
-        this.router.navigateByUrl('/bikes');
+        this.router.navigateByUrl('/bikes/listings');
+        form.resetForm();
+        // Update bikes list
+        this.sub = this.bikeService.getBikes().subscribe(bikes => {
+          this.bikes = bikes;
+        });
       });
+  }
+
+  onDelete(bikeToDelete: Bike) {
+    console.log('Deleting bike', bikeToDelete);
+    this.bikeService.deleteBike(bikeToDelete)
+      .subscribe(deletedBike => {
+        console.log('Deleted bike', deletedBike);
+        this.bikes = this.bikes.filter(bike => bike._id !== deletedBike._id);
+    });
   }
 
 }
