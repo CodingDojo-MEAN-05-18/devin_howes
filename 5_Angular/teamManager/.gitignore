@@ -33,6 +33,14 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.DS_Store
+.idea
+.vagrant
+bootstrap.sh
+VagrantFile
+bower_components/
+node_modules
+package-lock.json
 
 # System Files
 .DS_Store
