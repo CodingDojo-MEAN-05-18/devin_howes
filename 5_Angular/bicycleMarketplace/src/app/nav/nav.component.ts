@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class NavComponent implements OnInit {
   title = 'Bicycle Marketplace';
 
-  constructor() { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    if (this.auth.isAuthed()) {
+      console.log('logging out');
+      this.auth.logout();
+      this.router.navigateByUrl('/');
+    }
+  }
 }

@@ -4,6 +4,8 @@ import { Bike } from '../../bike';
 
 import { BikeService } from '../../services/bike.service';
 
+import { AuthService } from '../../services';
+
 @Component({
   selector: 'app-bike-list',
   templateUrl: './bike-list.component.html',
@@ -17,10 +19,11 @@ export class BikeListComponent implements OnInit, OnDestroy {
   bikeOwnerInfo = {id: '', name: '', email: ''};
 
   constructor(
-    private bikeService: BikeService,
+    private bikeService: BikeService, private auth: AuthService,
   ) { }
 
   ngOnInit() {
+    console.log(this.auth.userID);
     this.sub = this.bikeService.getBikes().subscribe(bikes => {
       this.bikes = bikes;
     });

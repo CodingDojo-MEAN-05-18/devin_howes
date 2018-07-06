@@ -19,10 +19,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit(user: User, login: any) {
+  onSubmit(user: User, event: Event): void {
+    event.preventDefault();
+    console.log('Logging in user', user);
     this.auth.login(user).subscribe(logged => {
-      console.log('logged in', user);
+      this.auth.userID = logged._id;
       this.router.navigateByUrl('bikes');
+    },
+    error => {
+      this.errors = error.error;
     });
   }
 }

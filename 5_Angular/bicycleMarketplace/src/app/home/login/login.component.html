@@ -8,7 +8,7 @@
 <section>
   <fieldset>
     <legend>Login</legend>
-    <form (submit)='onSubmit(login.value)' #login='ngForm' class='form-group'>
+    <form (submit)='onSubmit(login.value, $event)' #login='ngForm' class='form-group'>
       <div class="form-control">
         <label for="">Username: </label>
         <br>

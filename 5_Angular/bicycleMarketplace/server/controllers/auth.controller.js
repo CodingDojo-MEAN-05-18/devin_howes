@@ -26,7 +26,7 @@ module.exports = {
             })
             .catch(console.log);
     },
-    logout() {
+    logout(request, response) {
         console.log('logging out...', request.session);
         //clear session
         request.session.destroy();
