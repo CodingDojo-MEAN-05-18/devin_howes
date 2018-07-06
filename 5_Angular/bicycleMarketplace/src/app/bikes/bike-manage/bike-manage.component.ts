@@ -40,7 +40,6 @@ export class BikeManageComponent implements OnInit, OnDestroy {
     this.sub = this.bikeService.createBike(this.bike)
       .subscribe(bike => {
         console.log('bike from api', bike);
-        this.router.navigateByUrl('/bikes/listings');
         form.resetForm();
         // Update bikes list
         this.sub = this.bikeService.getBikes().subscribe(bikes => {
@@ -48,6 +47,19 @@ export class BikeManageComponent implements OnInit, OnDestroy {
         });
       });
   }
+
+  onUpdate(bikeToUpdate: Bike) {
+    console.log('updating bike', bikeToUpdate._id);
+
+    this.sub = this.bikeService.updateBike(bikeToUpdate._id, bikeToUpdate)
+      .subscribe(bike => {
+        console.log('bike from api', bike);
+        // Update bikes list
+        this.sub = this.bikeService.getBikes().subscribe(bikes => {
+          this.bikes = bikes;
+        });
+      });
+    }
 
   onDelete(bikeToDelete: Bike) {
     console.log('Deleting bike', bikeToDelete);

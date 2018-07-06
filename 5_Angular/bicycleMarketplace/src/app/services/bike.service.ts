@@ -25,6 +25,10 @@ export class BikeService {
     return this.http.post<Bike>(this.base, bike);
   }
 
+  updateBike(id: string, bike: Bike): Observable<Bike> {
+    return this.http.put<Bike>(`${this.base}/${id}`, bike);
+  }
+
   deleteBike(bike: Bike): Observable<Bike> {
     return this.http.delete<Bike>(`${this.base}/${bike._id}`);
   }

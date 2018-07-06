@@ -107,32 +107,80 @@
     <h3>Manage Listings</h3>
     <!-- Listings -->
     <div class="container" *ngFor='let bike of bikes | search:filter'>
-      <div class="listing">
-        <div class="row">
-          <div class="col-3">
-            <img src="{{ bike.image }}" alt="bike-image">
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <h4>{{ bike.title | titlecase }}</h4>
+      <form (submit)='onUpdate($event, updateForm)' #updateForm='ngForm'>
+        <div class="listing">
+          <div class="row">
+            <div class="col-3">
+              <img src="{{ bike.image }}" alt="bike-image">
+              <label for="">Image URL: </label>
+              <input
+                class="form-control"
+                type="text"
+                name='image'
+                value="{{ bike.image }}"
+                required
+                [(ngModel)]='bike.image'
+              >
             </div>
-            <div class="row">
-              <p>{{ bike.description }}</p>
+            <div class="col-6">
+              <div class="row">
+                <!-- <h4>{{ bike.title | titlecase }}</h4> -->
+                <label for="">Title</label>
+                <input 
+                  class="form-control" 
+                  type="text" 
+                  name="title"
+                  required
+                  [(ngModel)]='bike.title'
+                >
+              </div>
+              <div class="row">
+                <!-- <p>{{ bike.description }}</p> -->
+                <label for="">Description: </label>
+                <input 
+                  class="form-control"
+                  type="text"
+                  name='Description'
+                  required 
+                  maxlength="200"
+                  [(ngModel)]='bike.description'
+                >
+              </div>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="row">
-              <h5>{{ bike.price | currency:USD }}</h5>
-            </div>
-            <div class="row">
-              <p>{{ bike.location | titlecase }}</p>
-            </div>
-            <div class="row">
-              <button class="btn btn-danger" (click)="onDelete(bike)">Delete</button>
+            <div class="col-3">
+              <div class="row">
+                <!-- <h5>{{ bike.price | currency:USD }}</h5> -->
+                <label for="">Price: </label>
+                <input 
+                  class="form-control"
+                  type="number"
+                  name='price'
+                  value="{{ bike.price }}"
+                  required
+                  min="1"
+                  [(ngModel)]='bike.price'
+                >
+              </div>
+              <div class="row">
+                <!-- <p>{{ bike.location | titlecase }}</p> -->
+                <label for="">Location:</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name='location'
+                  value="{{ bike.location }}"
+                  required
+                  [(ngModel)]='bike.location'
+                >
+              </div>
+              <div class="row">
+                <button class="btn btn-danger" (click)="onDelete(bike)">Delete</button>
+                <button class="btn btn-success" [disabled]="!updateForm.valid" (click)="onUpdate(bike)">Update</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
