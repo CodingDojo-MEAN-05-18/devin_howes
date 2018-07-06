@@ -7,9 +7,9 @@ import { Bike } from '../bike';
 @Injectable()
 export class BikeService {
   // mock api for list of bikes
-  private base = 'https://5b3e8df4c3c3fb00147427ec.mockapi.io/bikes';
+  // private base = 'https://5b3e8df4c3c3fb00147427ec.mockapi.io/bikes';
 
-  // private base = '/api/bikes';
+  private base = '/api/bikes';
 
   constructor(private http: HttpClient) { }
 
