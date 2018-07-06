@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import * as fromBikes from './bikes';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BikeResolve } from './resolvers';
+import { HomeComponent } from './home/home.component';
+
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'bikes',
-        pathMatch: 'full',
+        component: HomeComponent,
     },
     {
         path: 'bikes',
@@ -20,10 +22,12 @@ const routes: Routes = [
             {
                 path: 'listings',
                 component: fromBikes.BikeManageComponent,
+                canActivate: [AuthGuard],
             },
             {
                 path: 'new',
                 component: fromBikes.BikeNewComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     book: BikeResolve
                 }

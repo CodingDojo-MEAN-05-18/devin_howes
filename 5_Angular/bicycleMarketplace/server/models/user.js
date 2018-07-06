@@ -8,14 +8,14 @@ const userSchema = new Schema(
     {
         username: {
             type: String,
-            required: true,
+            required: [true, 'username is required'],
             trim: true,
-            unique: true,
+            unique: [true, 'username is already taken'],
         },
         email: {
             type: String,
-            required: true,
-            unique: true,
+            required: [true, 'email is required'],
+            unique: [true, 'email is already registered'],
             trim: true,
             validate: {
                 validator(value) {
@@ -25,7 +25,7 @@ const userSchema = new Schema(
         },
         password: {
             type: String,
-            required: true,
+            required: [true, 'password is required'],
         },
     }, 
     { 

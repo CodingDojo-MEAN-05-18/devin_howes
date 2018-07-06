@@ -2,8 +2,8 @@ const User = require('mongoose').model('User');
 
 module.exports = {
     login(request, response) {
-        const { email, password } = request.body;
-        User.findOne({ email })
+        const { username, password } = request.body;
+        User.findOne({ username })
             .then(user => {
                 if(!user) {
                     throw Error();
@@ -27,12 +27,14 @@ module.exports = {
             .catch(console.log);
     },
     logout() {
+        console.log('logging out...', request.session);
         //clear session
         request.session.destroy();
         //clear cookies
         response.clearCookie('userID');
         response.clearCookie('expiration');
         response.json(true);
+        console.log(request.session);
     }
 };
 
