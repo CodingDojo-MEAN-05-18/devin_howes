@@ -1,7 +1,108 @@
 <div class="container">
   <div class="container">
     <h3>Add a Listing</h3>
+    <section>
+      <fieldset>
+        {{ bikeForm.value | json }}
+        <form (submit)='onSubmit($event, bikeForm)' #bikeForm='ngForm'>
+          <div>
+            <label for="">Title</label>
+            <input 
+              class="form-control" 
+              type="text" 
+              name='title' 
+              required
+              [(ngModel)]='bike.title'
+            >
+            <!-- Title Errors -->
+            <!-- <div *ngIf='(title.touched || title.dirty) && title.errors'>
+              <div *ngIf='title.errors.required'>
+                <p class="errors">Title is Required!</p>
+              </div>
+            </div> -->
+          </div>
+          <div>
+            <label for="">Description</label>
+            <input 
+              class="form-control"
+              type="text"
+              name='Description'
+              required 
+              maxlength="200"
+              [(ngModel)]='bike.description'
+            >
+            <!-- Description Erros
+            <div *ngIf='(description.touched || description.dirty ) && description.errors'>
+              <div *ngIf='description.errors.required'>
+                <p class="errors">Description is Required!</p>
+              </div>
+              <div *ngIf='description.errors.maxlength'>
+                <p class="errors">
+                  Description is too long. Max is {{ description.errors.maxlength.requiredLength }} characters!
+                </p>
+              </div>
+            </div> -->
+          </div>
+          <div>
+            <label for="">Price</label>
+            <input 
+              class="form-control"
+              type="number"
+              name='price'
+              required
+              min="1"
+              [(ngModel)]='bike.price'
+            >
+            <!-- Price Errors
+            <div *ngIf='(price.touched || price.dirty ) && price.errors'>
+              <div *ngIf='price.errors.required'>
+                <p class="errors">Price is Required!</p>
+              </div>
+              <div *ngIf='price.errors.min'>
+                <p class="errors">
+                  Price must be at least $1!
+                </p>
+              </div>
+            </div> -->
+          </div>
+          <div>
+            <label for="">Location</label>
+            <input
+              class="form-control"
+              type="text"
+              name='location'
+              required
+              [(ngModel)]='bike.location'
+            >
+            <!-- Location Errors
+            <div *ngIf='(location.touched || location.dirty ) && location.errors'>
+              <div *ngIf='location.errors.required'>
+                <p class="errors">Location is Required!</p>
+              </div>
+            </div> -->
+          </div>
+          <div>
+            <label for="">Image</label>
+            <input
+              class="form-control"
+              type="text"
+              name='image'
+              required
+              [(ngModel)]='bike.image'
+            >
+            <!-- Image Errors
+            <div *ngIf='(image.touched || image.dirty ) && image.errors'>
+              <div *ngIf='image.errors.required'>
+                <p class="errors">Image is Required!</p>
+              </div>
+            </div> -->
+          </div>
+          <button class="btn btn-success" [disabled]='!bikeForm.valid'>Submit</button>
+        </form>
+      </fieldset>
+    </section>
   </div>
+  <hr>
   <div class="container">
     <h3>Manage Listings</h3>
   </div>

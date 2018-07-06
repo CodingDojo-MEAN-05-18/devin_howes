@@ -22,7 +22,7 @@ export class BikeService {
   }
 
   createBike(bike: Bike): Observable<Bike> {
-    return this.http.post<Bike>(this.base, Bike);
+    return this.http.post<Bike>(this.base, bike);
   }
 
   deleteBike(bike: Bike): Observable<Bike> {
