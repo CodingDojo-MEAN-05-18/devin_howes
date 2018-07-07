@@ -33,7 +33,7 @@
             <p>{{ bike.location | titlecase }}</p>
           </div>
           <div class="row">
-            <button class="btn btn-danger" (click)="onDelete(bike)">Delete</button>
+            <button class="btn btn-danger" *ngIf='authed; else login' (click)='onDelete(bike)'>Delete</button>
             <button class="btn btn-primary" (click)="openModal(bike)">Contact</button>
           </div>
         </div>
@@ -41,6 +41,10 @@
     </div>
   </div>
 </div>
+
+<ng-template #login>
+  <p>Login to delete</p>
+</ng-template>
 
 <!-- Modal -->
 <div class="backdrop" [ngStyle]="{'display':display}"></div>

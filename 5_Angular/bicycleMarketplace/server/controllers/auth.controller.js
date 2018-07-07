@@ -2,21 +2,21 @@ const User = require('mongoose').model('User');
 
 module.exports = {
     login(request, response) {
-        const { username, password } = request.body;
-        User.findOne({ username })
-            .then(user => {
-                if(!user) {
-                    throw Error();
-                }
-            return User.validatePassword(password, user.password).then(() => {
-                console.log('found', username, 'attempting to log in user:', user);
+        const { email, password } = request.body;
+        User.findOne({ email })
+            .then(async user => { 
+                const valid = await User.validatePassword(password, user.password);
+
+                if (!valid) {
+                    throw new Error('Passwords do not match');
+                }  
                 //handle login
                 completeLogin(request, response, user);
-            });
-        })
-            .catch(_error => {
+            })
+            .catch(error => {
+                console.log('error message', error.message);
                 response.status(403).json({ error: 'user/password not found' });
-        });  
+            });
     },
     register(request, response) {
         console.log('registering user', request.body);
@@ -28,13 +28,12 @@ module.exports = {
             .catch(console.log);
     },
     logout(request, response) {
-        console.log('logging out...', request.session.user);
+        console.log('logging out...');
         //clear session
         request.session.destroy();
-        console.log(request.session.user);
         //clear cookies
-        response.clearCookie('userID');
-        response.clearCookie('expiration');
+        response.clearCookie('userID', { path: '/' });
+        response.clearCookie('expiration', { path: '/' });
         response.json(true);
     }
 };
@@ -42,10 +41,10 @@ module.exports = {
 function completeLogin(request, response, user) {
     //save user to session
     request.session.user = user.toObject();
-    console.log(request.session.user);
     //make sure password isn't saved in session
     delete request.session.user.password;
-
+    console.log(request.session.user);
+    
     //set cookies
     response.cookie('userID', user._id.toString());
     response.cookie('expiration', Date.now() + 86400 * 1000);

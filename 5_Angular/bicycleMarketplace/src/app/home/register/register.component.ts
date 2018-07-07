@@ -11,7 +11,7 @@ import { User } from '../../user';
 })
 export class RegisterComponent implements OnInit {
   user: User = new User();
-  errors: string[] = [];
+  registrationErrors: string[] = [];
 
   constructor(
     private readonly auth: AuthService,

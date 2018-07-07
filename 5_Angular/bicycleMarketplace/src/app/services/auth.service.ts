@@ -2,11 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../user';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class AuthService {
   private base = '/api/auth/';
+  authorized$ = new BehaviorSubject(this.isAuthed());
 
   constructor(
     private readonly http: HttpClient,
@@ -14,16 +17,23 @@ export class AuthService {
   ) { }
 
   login(user: User): Observable<User> {
-    return this.http.post<User>(this.base + 'login', user);
+    return this.http
+      .post<User>(this.base + 'login', user)
+      .pipe(tap(() => this.authorized$.next(this.isAuthed())));
   }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(this.base + 'register', user);
+    return this.http
+      .post<User>(this.base + 'register', user)
+      .pipe(tap(() => this.authorized$.next(this.isAuthed())));
   }
 
-  logout(id: string): Observable<boolean> {
-    console.log('logging out', id);
-    return this.http.delete<boolean>(`${this.base}logout/${id}`);
+  logout(): Observable<boolean> {
+    console.log('logging out');
+    return this.http.delete<boolean>(this.base + 'logout').pipe(
+      tap(() => this.cookieService.removeAll()),
+      tap(() => this.authorized$.next(false))
+    );
   }
 
   isAuthed(): boolean {

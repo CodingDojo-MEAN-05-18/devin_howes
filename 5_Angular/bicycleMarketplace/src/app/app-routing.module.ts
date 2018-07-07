@@ -6,7 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BikeResolve } from './resolvers';
 import { HomeComponent } from './home/home.component';
 
-import { AuthGuard } from './auth.guard';
+import * as fromGuards from './guards';
 
 const routes: Routes = [
     {
@@ -22,12 +22,11 @@ const routes: Routes = [
             {
                 path: 'listings',
                 component: fromBikes.BikeManageComponent,
-                canActivate: [AuthGuard],
+                canActivate: [fromGuards.AuthGuard],
             },
             {
                 path: 'new',
                 component: fromBikes.BikeNewComponent,
-                canActivate: [AuthGuard],
                 resolve: {
                     book: BikeResolve
                 }

@@ -2,9 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Bike } from '../../bike';
 
-import { BikeService } from '../../services/bike.service';
-
-import { AuthService } from '../../services';
+import { AuthService, BikeService } from '../../services';
 
 @Component({
   selector: 'app-bike-list',
@@ -14,18 +12,21 @@ import { AuthService } from '../../services';
 export class BikeListComponent implements OnInit, OnDestroy {
   bikes: Bike[] = [];
   sub: Subscription;
+  authed: boolean;
   filter: Bike = new Bike();
   display = 'none';
   bikeOwnerInfo = {id: '', name: '', email: ''};
 
   constructor(
-    private bikeService: BikeService, private auth: AuthService,
+    private bikeService: BikeService, private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.sub = this.bikeService.getBikes().subscribe(bikes => {
       this.bikes = bikes;
     });
+
+    this.auth.authorized$.subscribe(authed => (this.authed = authed));
   }
 
   ngOnDestroy() {
@@ -36,11 +37,17 @@ export class BikeListComponent implements OnInit, OnDestroy {
     this.filter = new Bike();
   }
 
+  onClick(event: Event) {
+    event.stopPropagation();
+    console.log('stopping prop', event);
+  }
+
   onDelete(bikeToDelete: Bike) {
     console.log('Deleting bike', bikeToDelete);
     this.bikeService.deleteBike(bikeToDelete)
       .subscribe(deletedBike => {
         console.log('Deleted bike', deletedBike);
+
         this.bikes = this.bikes.filter(bike => bike._id !== deletedBike._id);
     });
   }

@@ -13,13 +13,13 @@ import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 
 import * as fromBikes from './bikes';
+import * as fromServices from './services';
+import * as fromGuards from './guards';
 
-import { services } from './services';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BikeResolve } from './resolvers';
 import { SearchPipe } from './search.pipe';
-import { AuthGuard } from './auth.guard';
 
 
 
@@ -41,7 +41,7 @@ import { AuthGuard } from './auth.guard';
     AppRoutingModule,
     CookieModule.forRoot(),
   ],
-  providers: [...services, BikeResolve, AuthGuard],
+  providers: [...fromServices.services, BikeResolve, ...fromGuards.guards],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
